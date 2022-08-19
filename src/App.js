@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import logo from "./logo.svg";
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
       </header>
     </div>
   );
+=======
+import Router from "./shared/Router";
+function App() {
+  return <Router />;
+>>>>>>> Stashed changes
 }
 
 export default App;

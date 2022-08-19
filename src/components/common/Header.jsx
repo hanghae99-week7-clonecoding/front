@@ -44,10 +44,12 @@ const Hamburger = styled.div`
   height: 500px;
   width: ${({ menu }) => (menu ? "200px" : null)};
   transition: height 400ms ease-in-out;
+  background-image: #eeee;
   position: absolute;
-  z-index: 99;
   font-size: 20px;
   margin: 10px;
+
+  justify-content: center;
   & > div {
     margin-bottom: 10px;
   }

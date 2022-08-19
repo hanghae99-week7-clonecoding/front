@@ -1,0 +1,22 @@
+.HeaderBox {
+  display: flex;
+  width: 100%;
+}
+.HeaderLogo {
+  display: flex;
+  width: 30%;
+}
+.HeaderForm {
+  display: flex;
+  width: 60%;
+}
+.HeaderSerch {
+  display: flex;
+  width: 10%;
+}
+.HeaderInput {
+  width: 650px;
+  height: 30px;
+}
+.HambugerBox {
+}

@@ -1,0 +1,12 @@
+.detailWrap {
+  background-color: black;
+  width: 100%;
+}
+.contentLeft {
+  width: 50%;
+  background-color: red;
+}
+.contentRight {
+  width: 50%;
+  background-color: beige;
+}

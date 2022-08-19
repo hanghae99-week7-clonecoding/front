@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import styles from "../css_modules/Header.module.css";
 import styled from "styled-components";
+import Nav from "./Nav";
+
 const Header = () => {
   const [menu, Setmenu] = useState(false);
+  const [visible, Setvisible] = useState(false);
   return (
     <div>
       <div className={styles.HeaderBox}>
         <div className={styles.HeaderLogo}>
-          <div
+          <div className={styles.HeaderHamburger}
             onClick={() => {
               Setmenu((prev) => !prev);
+              Setvisible((prev) => !prev);
             }}
           >
             =
@@ -25,34 +29,10 @@ const Header = () => {
           <div>로그인</div>
         </div>
       </div>
-      {menu ? (
-        <Hamburger menu={menu}>
-          <div>홈</div>
-          <div>전체</div>
-          <div>음악</div>
-          <div>요리</div>
-          <div>스포츠</div>
-          <div>여행</div>
-          <div>게임</div>
-          <div>기타</div>
-        </Hamburger>
-      ) : null}
+
+      <Nav visible={visible} menu={menu}></Nav>
     </div>
   );
 };
-const Hamburger = styled.div`
-  height: 500px;
-  width: ${({ menu }) => (menu ? "200px" : null)};
-  transition: height 400ms ease-in-out;
-  background-image: #eeee;
-  position: absolute;
-  font-size: 20px;
-  margin: 10px;
-
-  justify-content: center;
-  & > div {
-    margin-bottom: 10px;
-  }
-`;
 
 export default Header;

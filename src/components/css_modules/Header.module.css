@@ -18,5 +18,6 @@
   width: 650px;
   height: 30px;
 }
-.HambugerBox {
+.HeaderHamburger {
+  z-index: 9999;
 }

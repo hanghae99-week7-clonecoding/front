@@ -1,0 +1,30 @@
+.CategoryBox {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+.Category {
+  width: 500px;
+  margin: 0 auto;
+}
+.Category > button {
+  font-size: 17px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.VideoBox {
+  width: 1400px;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  overflow: hidden;
+  justify-content: center;
+}
+.Video {
+  width: 450px;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+}

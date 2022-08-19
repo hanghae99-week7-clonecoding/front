@@ -10,13 +10,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-<<<<<<< Updated upstream
-        <Route path="/" element={<MainPage />}></Route>
-        <Route path="/detail/:id" element={<DetailPage />}></Route>
-=======
         {/* <Route path="/" element={<MainPage />}></Route>
         <Route path="/detail" element={<DetailPage />}></Route>
->>>>>>> Stashed changes
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/sign" element={<SignUpPage />}></Route>  */}
         <Route path="/addForm" element={<AddFormPage />}></Route> 

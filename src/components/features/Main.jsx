@@ -1,17 +1,53 @@
 import React from "react";
-import styled from "styled-components";
+import styles from "../css_modules/Main.module.css";
 const Main = () => {
   return (
-    <div>
-      <select>
-        <option>전체</option>
-        <option>음악</option>
-        <option>요리</option>
-        <option>스포츠</option>
-        <option>여행</option>
-        <option>게임</option>
-        <option>기타</option>
-      </select>
+    <div className={styles.CategoryBox}>
+      <div className={styles.Category}>
+        <button>전체</button>
+        <button>음악</button>
+        <button>요리</button>
+        <button>스포츠</button>
+        <button>여행</button>
+        <button>게임</button>
+        <button>기타</button>
+      </div>
+      <div className={styles.VideoBox}>
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+        <div>
+          <video></video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+        <div>
+          <video></video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+        <div>
+          <video></video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

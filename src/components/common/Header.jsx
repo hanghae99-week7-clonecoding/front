@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Nav from "./Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 
 const Header = () => {
   const [menu, Setmenu] = useState(false);
@@ -37,7 +38,7 @@ const Header = () => {
           <button>검색!</button>
         </form>
         <div className={styles.HeaderSerch}>
-          <div>camera</div>
+          <div>카메라</div>
           <div>로그인</div>
         </div>
       </div>

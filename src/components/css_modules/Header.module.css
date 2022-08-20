@@ -39,5 +39,8 @@
   margin-right: 30px;
 }
 button {
-  height: 38px;
+  width: 70px;
+  height: 35px;
+  border: 0;
+  border-radius: 5px;
 }

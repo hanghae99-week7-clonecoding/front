@@ -52,11 +52,11 @@ const Hamburger = styled.div`
 
   & > div {
     width: 100%;
-    height: 30px;
+    height: 50px;
     text-align: center;
-    line-height: 30px;
+    line-height: 50px;
   }
   & > div:hover {
-    background-color: aquamarine;
+    background-color: #eeee;
   }
 `;

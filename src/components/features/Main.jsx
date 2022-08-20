@@ -19,10 +19,17 @@ const Main = () => {
           <video muted loop preload="none">
             동영상영역
           </video>
-          <div>
-            <p className={styles.PstyleTitle}>타이틀</p>
-            <p className={styles.Pstyle}>유저</p>
-            <p className={styles.Pstyle}>날짜</p>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <div>프로필사진</div>
+            <div>
+              <p className={styles.PstyleTitle}>타이틀</p>
+              <p className={styles.Pstyle}>유저</p>
+              <p className={styles.Pstyle}>날짜</p>
+            </div>
           </div>
         </div>
         <div className={styles.Video}>

@@ -21,6 +21,15 @@ const Login = () => {
   return (
     <div className={styles.LoginBox}>
       <form onSubmit={onSubmitHandler} className={styles.LoginInput}>
+        <div className={styles.LoginLogoBox}>
+          <img
+            style={{ width: "150px" }}
+            src="https://github.com/zzinao/cloneProjectReact/blob/zzinao/src/shared/img/google_logo.png?raw=true"
+            alt="구글로고"
+          ></img>
+          <p className={styles.fristName}>Sign in</p>
+          <p>Use your Google Account</p>
+        </div>
         <input
           name="email"
           onChange={onChangeHandler}
@@ -32,7 +41,10 @@ const Login = () => {
           onChange={onChangeHandler}
           placeholder="비밀번호"
         ></input>
-        <button>로그인!</button>
+        <div className={styles.signBox}>
+          <div>Create account</div>
+          <button>로그인!</button>
+        </div>
       </form>
       <div></div>
     </div>

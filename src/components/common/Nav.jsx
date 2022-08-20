@@ -4,7 +4,6 @@ const Nav = ({ visible, menu }) => {
   return (
     <HanmbergerHome>
       <Hamburger visible={visible} menu={menu}>
-        <div>youtube</div>
         <div>홈</div>
         <div>전체</div>
         <div>음악</div>
@@ -19,7 +18,18 @@ const Nav = ({ visible, menu }) => {
 };
 export default Nav;
 
-const HanmbergerHome = styled.div``;
+const HanmbergerHome = styled.div`
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.5);
+  @keyframes modal-bg-show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
 
 const Hamburger = styled.div`
   width: 50px;
@@ -29,21 +39,22 @@ const Hamburger = styled.div`
   transition: width 400ms ease-in-out;
   background-color: white;
   position: absolute;
-  font-size: 20px;
+  font-size: 15px;
   z-index: 99;
   box-shadow: 2100px 2000px 2090px 2500px rgba(0, 0, 0, 0.5);
   text-align: center;
   justify-content: space-between;
   padding: 0 0 40px 0;
-
-  top: 0px;
   display: flex;
   flex-direction: column;
+  top: -40px;
+  animation: modal-bg-show 0.3s;
 
   & > div {
-    height: 50px;
+    width: 100%;
+    height: 30px;
     text-align: center;
-    line-height: 50px;
+    line-height: 30px;
   }
   & > div:hover {
     background-color: aquamarine;

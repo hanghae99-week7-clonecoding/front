@@ -5,17 +5,21 @@
   z-index: 999;
 }
 .Category {
-  width: 500px;
+  width: 800px;
   margin: 0 auto;
   z-index: 999;
+  text-align: center;
 }
 .Category > button {
-  padding: 5px;
+  width: 100px;
+  padding: 15px;
   font-size: 15px;
   margin-left: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   border: 0;
+  text-align: center;
+  line-height: 5px;
 }
 button:active {
   background-color: black;

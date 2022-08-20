@@ -1,0 +1,42 @@
+.commentWrap {
+  width: 100%;
+  margin: 1rem 0 0 0;
+}
+.commentWrite {
+  width: 100%;
+  display: flex;
+}
+.commentWrite .profile {
+  width: 5%;
+}
+.commentWrite .profile div {
+  height: 45px;
+  border-radius: 50%;
+  background-color: red;
+}
+.commentWrite .comment {
+  width: 95%;
+  margin: 0 0 0 5px;
+}
+.commentWrite .comment input {
+  width: 100%;
+  vertical-align: middle;
+  border: none;
+  outline: none;
+  height: 40px;
+  background: transparent;
+  border-bottom: 3px solid rgb(205, 204, 204);
+  transition-property: border-bottom;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+.commentWrite .comment input:focus {
+  border-bottom: 2px solid #333;
+  transition-property: border-bottom;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+.btnWrap {
+  display: flex;
+  justify-content: end;
+}

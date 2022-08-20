@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../css_modules/Main.module.css";
+import styled from "styled-components";
 const Main = () => {
+  const [button, Setbutton] = useState(false);
   return (
     <div className={styles.CategoryBox}>
       <div className={styles.Category}>
@@ -18,29 +20,66 @@ const Main = () => {
             동영상영역
           </video>
           <div>
-            <p>타이틀</p>
-            <p>유저</p>
-            <p>날짜</p>
+            <p className={styles.PstyleTitle}>타이틀</p>
+            <p className={styles.Pstyle}>유저</p>
+            <p className={styles.Pstyle}>날짜</p>
           </div>
         </div>
-        <div>
-          <video></video>
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
           <div>
             <p>타이틀</p>
             <p>유저</p>
             <p>날짜</p>
           </div>
         </div>
-        <div>
-          <video></video>
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
           <div>
             <p>타이틀</p>
             <p>유저</p>
             <p>날짜</p>
           </div>
         </div>
-        <div>
-          <video></video>
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
+          <div>
+            <p>타이틀</p>
+            <p>유저</p>
+            <p>날짜</p>
+          </div>
+        </div>
+        <div className={styles.Video}>
+          <video muted loop preload="none">
+            동영상영역
+          </video>
           <div>
             <p>타이틀</p>
             <p>유저</p>
@@ -52,3 +91,12 @@ const Main = () => {
   );
 };
 export default Main;
+
+const Buttons = styled.button`
+  padding: 5px;
+  font-size: 15px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 0;
+`;

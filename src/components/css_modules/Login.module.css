@@ -1,0 +1,57 @@
+.LoginBox {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.LoginLogoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.fristName {
+  font-size: 30px;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.LoginInput {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LoginInput > input {
+  width: 500px;
+  height: 50px;
+  margin-bottom: 30px;
+  border: 0;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid #4b88f7;
+}
+.LoginInput > button {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  background-color: #4b88f7;
+  color: white;
+}
+.signBox {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.signBox > button {
+  width: 100px;
+  background-color: #4b88f7;
+  border: 0;
+  border-radius: 5px;
+}

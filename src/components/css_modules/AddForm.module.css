@@ -25,6 +25,11 @@
     outline: none;
 }
 
+span{
+    color: #606060;
+    font-size: 0.8rem;
+}
+
 input, textarea {
     border: none;
     width: 95%;

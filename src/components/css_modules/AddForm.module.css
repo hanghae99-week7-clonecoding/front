@@ -1,0 +1,109 @@
+.addFormBox {
+    display: grid;
+    grid-template-columns: repeat(1, 7fr 3fr);
+    grid-template-rows: auto;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+.textBox {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+
+}
+
+.textBox2 {
+    flex-direction: column;
+    border: 1px solid #ccc;
+    color: #a0a0a0;
+    border-radius: 4px;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.3rem;
+    outline: none;
+}
+
+span{
+    color: #606060;
+    font-size: 0.8rem;
+}
+
+input, textarea {
+    border: none;
+    width: 95%;
+    margin: 0.3rem;
+    resize: none;
+    line-height: 20px;
+    outline: none;
+    /* font-size: 0.8em; */
+}
+
+.textBox3 {
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 8rem;
+    height: 2rem;
+    align-items: center;
+    text-align: center;
+    padding-top: 1.3rem;
+    font-size: 0.5rem;
+    margin-right: 0.3rem;
+}
+
+.fileUpload{
+    margin-top: 0.4rem;
+    display: flex;
+
+}
+
+.subTitle{
+    margin-top: 0.3rem;
+    margin-left: 0.4rem;
+    color: #606060;
+    font-size: 0.8rem;
+    /* float: left; */
+}
+
+select{
+    appearance: none;
+}
+
+.subscribe{
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
+    color: #606060;
+    font-size: 0.8rem;
+}
+
+.selectBox{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 15rem;
+    height: 3rem;
+}
+
+.upload {
+    display: flex;
+    width: 50px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: .4rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 2px;
+
+}
+
+.button {
+    width: 100%;
+    height: 2rem;
+    margin-top: 5px;
+    background-color:white;
+    border: 1px solid #a0a0a0;
+    border-radius: 4px;
+}

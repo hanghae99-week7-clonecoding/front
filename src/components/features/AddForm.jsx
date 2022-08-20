@@ -6,6 +6,7 @@ const AddForm = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState()
     const [category, setCategory] = useState()
+    const [img, setImg] = useState()
 
     const changeTitle = (e) => {
         setTitle(e.target.value)
@@ -22,10 +23,12 @@ const AddForm = () => {
     }
     console.log(category)
 
-    // const jsonData={
-    //     title:'title'
+    const changeImg = (e) => {
+        const uploadImg = e.target.files;
+        setImg(uploadImg)
+    }
+    console.log(changeImg)
 
-    // }
     return (
         // 타이틀 
         <div className={styles.addFormBox}>
@@ -55,7 +58,7 @@ const AddForm = () => {
                     <br />
                     <div className={styles.fileUpload}>
                         <div className={styles.textBox3}>미리보기 이미지 업로드</div>
-                        <div className={styles.textBox3}>file위치</div>
+                        <input onChange={changeImg} id="img" type="file" accept=".png, .jgp, .png, .jpeg" className={styles.textBox3} />
                     </div>
                 </div>
                 {/* 카테고리 선택부분 */}

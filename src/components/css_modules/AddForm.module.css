@@ -83,6 +83,7 @@ select{
     border-radius: 4px;
     width: 15rem;
     height: 3rem;
+    padding-left: 15px;
 }
 
 .upload {

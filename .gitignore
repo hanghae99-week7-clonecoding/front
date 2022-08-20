@@ -7,7 +7,7 @@
 /db.json
 # testing
 /coverage
-yarn.lock
+yarn.lock*
 
 # production
 /build

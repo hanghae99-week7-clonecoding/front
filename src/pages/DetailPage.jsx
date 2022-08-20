@@ -6,8 +6,9 @@ import Comment from "../components/features/Comment";
 const DetailPage = () => {
   return (
     <Layout>
-      <Detail />
-      <Comment />
+      <Detail>
+        <Comment />
+      </Detail>
     </Layout>
   );
 };

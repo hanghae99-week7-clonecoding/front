@@ -1,20 +1,36 @@
 import React, { useState } from "react";
 import styles from "../css_modules/Header.module.css";
 import styled from "styled-components";
+import Nav from "./Nav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
 const Header = () => {
   const [menu, Setmenu] = useState(false);
+  const [visible, Setvisible] = useState(false);
   return (
     <div>
       <div className={styles.HeaderBox}>
         <div className={styles.HeaderLogo}>
           <div
+            className={styles.HeaderHamburger}
             onClick={() => {
               Setmenu((prev) => !prev);
+              Setvisible((prev) => !prev);
             }}
           >
-            =
+            <FontAwesomeIcon
+              className={styles.hamburger}
+              icon={faBars}
+            ></FontAwesomeIcon>
           </div>
-          <div>youtube</div>
+          <div className={styles.logo}>
+            <img
+              style={{ width: "100px" }}
+              src="https://raw.githubusercontent.com/zzinao/cloneProjectReact/zzinao/src/shared/img/Youtube-Logo.png"
+              alt="유튜브사진"
+            ></img>
+          </div>
         </div>
         <form className={styles.HeaderForm}>
           <input className={styles.HeaderInput}></input>
@@ -25,34 +41,10 @@ const Header = () => {
           <div>로그인</div>
         </div>
       </div>
-      {menu ? (
-        <Hamburger menu={menu}>
-          <div>홈</div>
-          <div>전체</div>
-          <div>음악</div>
-          <div>요리</div>
-          <div>스포츠</div>
-          <div>여행</div>
-          <div>게임</div>
-          <div>기타</div>
-        </Hamburger>
-      ) : null}
+
+      <Nav visible={visible} menu={menu}></Nav>
     </div>
   );
 };
-const Hamburger = styled.div`
-  height: 500px;
-  width: ${({ menu }) => (menu ? "200px" : null)};
-  transition: height 400ms ease-in-out;
-  background-image: #eeee;
-  position: absolute;
-  font-size: 20px;
-  margin: 10px;
-
-  justify-content: center;
-  & > div {
-    margin-bottom: 10px;
-  }
-`;
 
 export default Header;

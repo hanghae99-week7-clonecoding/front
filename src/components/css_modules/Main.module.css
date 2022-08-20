@@ -2,29 +2,57 @@
   width: 100%;
   margin: 0 auto;
   margin-top: 15px;
+  z-index: 999;
 }
 .Category {
-  width: 500px;
+  width: 800px;
   margin: 0 auto;
+  z-index: 999;
+  text-align: center;
 }
 .Category > button {
-  font-size: 17px;
+  width: 100px;
+  padding: 15px;
+  font-size: 15px;
   margin-left: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+  text-align: center;
+  line-height: 5px;
+}
+button:active {
+  background-color: black;
+  color: white;
+}
+
+.VideoBox {
+  width: 100%;
+  border: 1px solid black;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow: hidden;
+  display: flex;
+  margin-top: 15px;
+  padding: 0 100px;
+}
+video {
+  height: 200px;
   cursor: pointer;
 }
-.VideoBox {
-  width: 1400px;
-  border: 1px solid black;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  overflow: hidden;
-  justify-content: center;
-}
 .Video {
-  width: 450px;
-  height: 200px;
-  align-items: center;
-  justify-content: center;
+  width: 400px;
+  height: 260px;
+  border: 1px solid salmon;
+  margin: 10px;
+}
+p {
+  margin-left: 10px;
+}
+.PstyleTitle {
+  font-size: 1.2rem;
+}
+.Pstyle {
+  color: #606060;
+  font-size: 1rem;
 }

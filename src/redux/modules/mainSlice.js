@@ -19,6 +19,18 @@ export const __getMovie = createAsyncThunk(
     }
   }
 );
+export const __getTitle = createAsyncThunk(
+  "lists/getTitle",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const data = await axios.post(`http://localhost:3001/`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const MovieSlice = createSlice({
   name: "MovieList",
@@ -27,7 +39,12 @@ export const MovieSlice = createSlice({
   extraReducers: {
     [__getMovie.pending]: (state) => {},
     [__getMovie.fulfilled]: (state, action) => {
-      state.tocomments.push(action.payload);
+      state.lists.push(action.payload);
+      console.log(current(state), action);
+    },
+    [__getTitle.pending]: (state) => {},
+    [__getTitle.fulfilled]: (state, action) => {
+      state.lists.push(action.payload);
       console.log(current(state), action);
     },
   },

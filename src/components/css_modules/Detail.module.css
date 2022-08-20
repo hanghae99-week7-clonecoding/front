@@ -1,12 +1,14 @@
+/* 상세보기 영상소개*/
 .detailWrap {
-  background-color: black;
   display: flex;
   width: 100%;
   height: 200vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
 }
+/* 상세보기 영상소개 */
 .contentLeft {
   width: 70%;
-  background-color: red;
   margin: 0 0 0 1.5rem;
   padding: 1.5rem 1.5rem 0 0;
 }
@@ -16,23 +18,98 @@
 .payler iframe {
   width: 100%;
 }
-.title {
-}
+
 .title h2 {
   line-height: 2.6rem;
-  font-weight: 400;
-  color: #ffff;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
-.btnWrap {
+.titleInfo {
+  margin: 0.8rem 0 0.8rem 0;
 }
-.btnWrap button {
-  border: none;
+.title div {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: rgb(161, 160, 160);
 }
+/* --------상세보기 영상소개 end--------- */
+/* 상세보기 유저 채널명 및 해당 게시글 소개 */
+.userInfo {
+  border-bottom: 1px solid rgb(161, 160, 160);
+  border-top: 1px solid rgb(161, 160, 160);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+.userInfo .imgArea {
+  width: 7%;
+}
+.imgArea div {
+  height: 45%;
+  border-radius: 50%;
+  background-color: yellow;
+}
+.userInfo .user {
+  width: 83%;
+  font-size: 1.2rem;
+  margin: 0 0.6rem;
+}
+.userInfo .user .userName {
+  font-weight: 900;
+}
+.userInfo .user .userSubScriptNum,
+.userInfo .user span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(161, 160, 160);
+}
+.user p {
+  margin: 1rem 0;
+  font-weight: 900;
+}
+.userInfo button {
+  width: 10%;
+  height: 40px;
+  /* background-color: red; */
+  text-align: center;
+  border-radius: 5px;
+}
+/* ---상세보기 유저 채널명 및 해당 게시글 소개  env----- */
+
+/* 상세보기 우측 플레이 리스트 - DetailRight.jsx 에서 같은 css  */
 .contentRight {
   width: 30%;
-  background-color: beige;
   padding: 1.5rem 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.rightList {
+  display: flex;
+  width: 100%;
+}
+.rightList:not(:first-of-type) {
+  margin: 1rem 0 0 0;
 }
 .rightList iframe {
-  width: 20%;
+  width: 50%;
 }
+.rightList .rightText {
+  width: 50%;
+  margin: 0 0 0 0.5rem;
+  font-family: "Roboto", sans-serif;
+}
+.rightList .rightText div:nth-child(1) {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.rightList .rightText div:nth-child(2) {
+  color: rgb(161, 160, 160);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 1rem 0 0 0;
+}
+
+/* ----상세보기 우플 플레이 리스트 end----- */

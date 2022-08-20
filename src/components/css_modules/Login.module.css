@@ -1,0 +1,27 @@
+.LoginBox {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.LoginInput {
+  width: 200px;
+  display: flex;
+  height: 170px;
+  flex-direction: column;
+  align-items: center;
+}
+.LoginInput > input {
+  width: 500px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+.LoginInput > button {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+}

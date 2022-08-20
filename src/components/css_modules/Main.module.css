@@ -10,23 +10,45 @@
   z-index: 999;
 }
 .Category > button {
-  font-size: 17px;
+  padding: 5px;
+  font-size: 15px;
   margin-left: 10px;
   border-radius: 5px;
   cursor: pointer;
+  border: 0;
 }
+button:active {
+  background-color: black;
+  color: white;
+}
+
 .VideoBox {
-  width: 1400px;
+  width: 100%;
   border: 1px solid black;
-  display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  justify-content: flex-start;
   overflow: hidden;
-  justify-content: center;
+  display: flex;
+  margin-top: 15px;
+  padding: 0 100px;
+}
+video {
+  height: 200px;
+  cursor: pointer;
 }
 .Video {
-  width: 450px;
-  height: 200px;
-  align-items: center;
-  justify-content: center;
+  width: 400px;
+  height: 260px;
+  border: 1px solid salmon;
+  margin: 10px;
+}
+p {
+  margin-left: 10px;
+}
+.PstyleTitle {
+  font-size: 1.2rem;
+}
+.Pstyle {
+  color: #606060;
+  font-size: 1rem;
 }

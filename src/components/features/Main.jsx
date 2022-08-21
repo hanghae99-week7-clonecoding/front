@@ -6,21 +6,21 @@ import { __getMovie } from "../../redux/modules/mainSlice";
 import ReactPlayer from "react-player/lazy";
 import { useInView } from "react-intersection-observer";
 const Main = () => {
-  const { lists, isLoading } = useSelector((state) => state.main);
-  console.log(lists, isLoading);
   const [ref, inview] = useInView(); //보이면 true,안보이면 faluse
   const [page, setPage] = useState(1); //페이지수
+  const { lists, isLoading } = useSelector((state) => state.main);
   const dispatch = useDispatch();
-  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     dispatch(__getMovie(page));
-  }, [dispatch, page]);
+  }, [page]);
   useEffect(() => {
     if (inview && !isLoading) {
       setPage((prevState) => prevState + 1);
     }
-  }, [inview]);
+  }, []);
+
+  console.log(inview);
   console.log(page);
   return (
     <div className={styles.CategoryBox}>
@@ -36,12 +36,8 @@ const Main = () => {
       <div className={styles.VideoBox}>
         {lists.map((list, idx) => {
           return (
-            <div key={idx} ref={ref}>
-              <div
-                onMouseOver={() => setHover(true)}
-                onMouseOut={() => setHover(false)}
-                className={styles.Video}
-              >
+            <div key={idx}>
+              <div ref={ref} className={styles.Video}>
                 <ReactPlayer
                   url={list.url}
                   playing={false}

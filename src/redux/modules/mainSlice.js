@@ -41,8 +41,6 @@ export const mainSlice = createSlice({
       state.isLoading = true;
     },
     [__getMovie.fulfilled]: (state, action) => {
-      console.log(action.payload);
-      // state.lists.push(action.payload);
       state.lists = [...state.lists].concat(action.payload);
       state.isLoading = false;
     },

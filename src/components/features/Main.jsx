@@ -10,15 +10,16 @@ const Main = () => {
   const [page, setPage] = useState(1); //페이지수
   const { lists, isLoading } = useSelector((state) => state.main);
   const dispatch = useDispatch();
-
+  console.log(lists);
   useEffect(() => {
     dispatch(__getMovie(page));
-  }, []);
+  }, [page]);
   useEffect(() => {
     if (inview && !isLoading) {
       setPage((prevState) => prevState + 1);
     }
-  }, []);
+  }, [inview]);
+  const onClickHandler = (event) => {};
 
   console.log(inview);
   console.log(page);
@@ -37,32 +38,61 @@ const Main = () => {
         {lists.map((list, idx) => {
           return (
             <div key={idx}>
-              <div ref={ref} className={styles.Video}>
-                <ReactPlayer
-                  url={list.url}
-                  playing={false}
-                  muted={true}
-                  width="400px"
-                  height="210px"
-                >
-                  동영상영역
-                </ReactPlayer>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "5px",
-                  }}
-                >
-                  <div>
-                    <div className={styles.userImg}>프로필사진</div>
-                  </div>
-                  <div>
-                    <p className={styles.PstyleTitle}>타이틀</p>
-                    <p className={styles.Pstyle}>유저</p>
-                    <p className={styles.Pstyle}>날짜</p>
+              {lists.length - 1 == idx ? (
+                <div ref={ref} className={styles.Video}>
+                  <ReactPlayer
+                    url={list.url}
+                    playing={false}
+                    muted={true}
+                    width="400px"
+                    height="210px"
+                  >
+                    동영상영역
+                  </ReactPlayer>
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: "5px",
+                    }}
+                  >
+                    <div>
+                      <div className={styles.userImg}>프로필사진</div>
+                    </div>
+                    <div>
+                      <p className={styles.PstyleTitle}>타이틀</p>
+                      <p className={styles.Pstyle}>유저</p>
+                      <p className={styles.Pstyle}>날짜</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className={styles.Video}>
+                  <ReactPlayer
+                    url={list.url}
+                    playing={false}
+                    muted={true}
+                    width="400px"
+                    height="210px"
+                  >
+                    동영상영역
+                  </ReactPlayer>
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: "5px",
+                    }}
+                  >
+                    <div>
+                      <div className={styles.userImg}>프로필사진</div>
+                    </div>
+                    <div>
+                      <p className={styles.PstyleTitle}>타이틀</p>
+                      <p className={styles.Pstyle}>유저</p>
+                      <p className={styles.Pstyle}>날짜</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}

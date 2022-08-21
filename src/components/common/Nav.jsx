@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Nav = ({ visible, menu }) => {
   return (
     <HanmbergerHome>
@@ -43,11 +45,10 @@ const Hamburger = styled.div`
   z-index: 99;
   box-shadow: 2100px 2000px 2090px 2500px rgba(0, 0, 0, 0.5);
   text-align: center;
-  justify-content: space-between;
   padding: 0 0 40px 0;
   display: flex;
   flex-direction: column;
-  top: -40px;
+  top: 0;
   animation: modal-bg-show 0.3s;
 
   & > div {
@@ -55,6 +56,8 @@ const Hamburger = styled.div`
     height: 50px;
     text-align: center;
     line-height: 50px;
+    position: relative;
+    top: 80px;
   }
   & > div:hover {
     background-color: #eeee;

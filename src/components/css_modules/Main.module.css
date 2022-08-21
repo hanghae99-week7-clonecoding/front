@@ -40,19 +40,24 @@ video {
   height: 200px;
   cursor: pointer;
 }
+.userImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid black;
+}
 .Video {
   width: 400px;
   height: 260px;
   border: 1px solid salmon;
   margin: 10px;
 }
-p {
-  margin-left: 10px;
-}
+
 .PstyleTitle {
-  font-size: 1.2rem;
+  font-size: 16px;
+  margin: 0;
 }
 .Pstyle {
   color: #606060;
-  font-size: 1rem;
+  font-size: 14px;
 }

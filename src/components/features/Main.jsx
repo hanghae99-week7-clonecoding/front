@@ -13,7 +13,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(__getMovie(page));
-  }, [page]);
+  }, []);
   useEffect(() => {
     if (inview && !isLoading) {
       setPage((prevState) => prevState + 1);

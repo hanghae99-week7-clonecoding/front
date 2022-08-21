@@ -4,8 +4,12 @@ import styled from "styled-components";
 import Nav from "./Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [menu, Setmenu] = useState(false);
   const [visible, Setvisible] = useState(false);
   return (
@@ -26,19 +30,32 @@ const Header = () => {
           </div>
           <div className={styles.logo}>
             <img
-              style={{ width: "100px" }}
-              src="https://raw.githubusercontent.com/zzinao/cloneProjectReact/zzinao/src/shared/img/Youtube-Logo.png"
+              className={styles.logoimg}
+              src="/img/logo2.png"
               alt="유튜브사진"
             ></img>
           </div>
         </div>
         <form className={styles.HeaderForm}>
-          <input className={styles.HeaderInput}></input>
-          <button>검색!</button>
+          <input placeholder="검색" className={styles.HeaderInput}></input>
+          <button>
+            <FontAwesomeIcon
+              style={{ height: "15px" }}
+              icon={faMagnifyingGlass}
+            ></FontAwesomeIcon>
+          </button>
         </form>
         <div className={styles.HeaderSerch}>
-          <div>카메라</div>
-          <div>로그인</div>
+          <div>
+            <FontAwesomeIcon icon={faCamera}></FontAwesomeIcon>
+          </div>
+          <div
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </div>
         </div>
       </div>
 

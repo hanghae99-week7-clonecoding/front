@@ -2,21 +2,30 @@
   display: flex;
   width: 100%;
   height: 56px;
-  margin-top: 5px;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #dddd;
+  background-color: #ffff;
+  position: fixed;
+  z-index: 999;
+  top: -5px;
 }
 .HeaderLogo {
   display: flex;
   height: 30px;
   padding: 20px;
   z-index: 999;
+  justify-content: center;
+  align-items: center;
 }
 .logo {
   width: 90px;
-  height: 20px;
+  height: 30px;
 }
-
+.logoimg {
+  width: 100px;
+  margin-top: -13px;
+}
 .HeaderForm {
   display: flex;
   justify-content: center;
@@ -24,8 +33,8 @@
 }
 
 .HeaderInput {
-  width: 650px;
-  height: 30px;
+  width: 500px;
+  height: 35px;
   border: 1px solid #eeeeee;
   outline: none;
   border-radius: 5px;
@@ -47,7 +56,7 @@
 }
 button {
   width: 70px;
-  height: 35px;
+  height: 39px;
   border: 0;
   border-radius: 5px;
 }

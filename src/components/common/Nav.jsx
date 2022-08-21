@@ -49,7 +49,7 @@ const Hamburger = styled.div`
   display: flex;
   flex-direction: column;
   top: 0;
-  animation: modal-bg-show 0.3s;
+  position: fixed;
 
   & > div {
     width: 100%;
@@ -57,7 +57,7 @@ const Hamburger = styled.div`
     text-align: center;
     line-height: 50px;
     position: relative;
-    top: 80px;
+    top: 100px;
   }
   & > div:hover {
     background-color: #eeee;

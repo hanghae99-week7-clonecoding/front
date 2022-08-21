@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Main.module.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,20 +19,37 @@ const Main = () => {
       setPage((prevState) => prevState + 1);
     }
   }, [inview]);
-  const onClickHandler = (event) => {};
+  const onClickHandler = (event) => {
+    const { id } = event.target;
+    console.log(id);
+  };
 
   console.log(inview);
   console.log(page);
   return (
     <div className={styles.CategoryBox}>
       <div className={styles.Category}>
-        <button>전체</button>
-        <button>음악</button>
-        <button>요리</button>
-        <button>스포츠</button>
-        <button>여행</button>
-        <button>게임</button>
-        <button>기타</button>
+        <button onClick={onClickHandler} id="전체">
+          전체
+        </button>
+        <button onClick={onClickHandler} id="음악">
+          음악
+        </button>
+        <button onClick={onClickHandler} id="요리">
+          요리
+        </button>
+        <button onClick={onClickHandler} id="스포츠">
+          스포츠
+        </button>
+        <button onClick={onClickHandler} id="여행">
+          여행
+        </button>
+        <button onClick={onClickHandler} id="게임">
+          게임
+        </button>
+        <button onClick={onClickHandler} id="기타">
+          기타
+        </button>
       </div>
       <div className={styles.VideoBox}>
         {lists.map((list, idx) => {

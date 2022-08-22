@@ -28,6 +28,13 @@ const Main = () => {
   console.log(page);
   return (
     <div className={styles.CategoryBox}>
+      <div className={styles.NavBox}>
+        <div>홈</div>
+        <div>탐색</div>
+        <div>Shorts</div>
+        <div>구독</div>
+        <div>보관함</div>
+      </div>
       <div className={styles.Category}>
         <button onClick={onClickHandler} id="전체">
           전체

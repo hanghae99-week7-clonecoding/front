@@ -48,7 +48,7 @@ const Hamburger = styled.div`
   padding: 0 0 40px 0;
   display: flex;
   flex-direction: column;
-  top: 0;
+  top: 10px;
   position: fixed;
 
   & > div {

@@ -2,7 +2,7 @@ import axios from "axios";
 const getToken = localStorage.getItem("jwtToken");
 
 const instance = axios.create({
-  baseURL: "http://nodeapi.myspaceti.me:8002/api",
+  baseURL: "http://15.164.221.168:8000/",
   headers: { token: `Bearer ${getToken}` },
 });
 // if (getToken) {

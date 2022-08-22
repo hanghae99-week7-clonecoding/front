@@ -1,25 +1,26 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import instance from "../../res/instance";
 
 export const postWritesThunk = createAsyncThunk(
-  "addForm",
+  "addForm/getAddForm",
   async (payload, thunkAPI) => {
     console.log(payload)
 
     // 페이로드 확인을 위해 주석처리 
-    // try {
-    //   const response = await instance.post('/post/${payload}');
+    try {
+      const response = await instance.post('post',payload);
   
-    //   return response.data;
-    // } catch (error) {
-    //   return thunkAPI.rejectWithValue(error);
-    // }
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 
 
 export const AddForm = createSlice({
-    name: "WriteForm",
+    name: "addForm",
     initialState: {},
     reducers: {},
     extraReducers: (builder) => {

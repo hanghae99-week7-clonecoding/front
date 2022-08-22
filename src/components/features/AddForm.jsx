@@ -30,7 +30,6 @@ const AddForm = () => {
         data.append('title', title)
         data.append('content', content)
         data.append('category', category)
-        data.append('title', title)
 
         // FormData의 value 확인
         for (let value of data.values()) {

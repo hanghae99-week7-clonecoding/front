@@ -61,6 +61,9 @@ const Main = () => {
                     url={list.url}
                     playing={false}
                     muted={true}
+                    controls={true}
+                    light={false}
+                    poster={list.url}
                     width="400px"
                     height="210px"
                   >
@@ -73,7 +76,7 @@ const Main = () => {
                     }}
                   >
                     <div>
-                      <div className={styles.userImg}>프로필사진</div>
+                      <div className={styles.userImg}></div>
                     </div>
                     <div>
                       <p className={styles.PstyleTitle}>타이틀</p>
@@ -90,9 +93,7 @@ const Main = () => {
                     muted={true}
                     width="400px"
                     height="210px"
-                  >
-                    동영상영역
-                  </ReactPlayer>
+                  ></ReactPlayer>
                   <div
                     style={{
                       display: "flex",
@@ -100,7 +101,13 @@ const Main = () => {
                     }}
                   >
                     <div>
-                      <div className={styles.userImg}>프로필사진</div>
+                      <div>
+                        <img
+                          className={styles.userImg}
+                          src={list.userimg}
+                          alt="유저사진"
+                        ></img>
+                      </div>
                     </div>
                     <div>
                       <p className={styles.PstyleTitle}>타이틀</p>

@@ -54,7 +54,7 @@ const AddForm = () => {
                     <div>미리보기 이미지</div>
                     <div className={styles.subscribe}>동영상의 내용을 알려주는 사진을 선택하거나 업로드하세요.
                         시청자의 시선을 사로잡을만한 이미지를 사용해 보세요.</div>
-                    <span>자세히 알아보기</span>
+                    <span className={styles.add}>자세히 알아보기</span>
                     <br />
                     <div className={styles.fileUpload}>
                         <div className={styles.textBox3}>미리보기 이미지 업로드</div>

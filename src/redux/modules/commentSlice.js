@@ -6,12 +6,14 @@ const initialState = {
   result: "",
 };
 
-export const addUser = createAsyncThunk(
-  "signUpSlice/addUser",
+export const sendComment = createAsyncThunk(
+  "commentSlice/sendComment",
   async (payload, thunkAPI) => {
     try {
-      const responseData = await instance.post("user/signup", payload);
-      console.log(responseData.data);
+      const responseData = await instance.post(
+        `comment/${payload.postId}`,
+        payload.comment
+      );
       return responseData.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -19,23 +21,23 @@ export const addUser = createAsyncThunk(
   }
 );
 
-export const signUpSlice = createSlice({
-  name: "signUpSlice",
+export const commentSlice = createSlice({
+  name: "commentSlice",
   initialState,
   reducers: {},
   extraReducers: {
-    [addUser.pending]: (state) => {
+    [sendComment.pending]: (state) => {
       state.isLoading = true;
     },
-    [addUser.fulfilled]: (state, action) => {
+    [sendComment.fulfilled]: (state, action) => {
       state.result = action.payload;
       state.isLoading = false;
     },
-    [addUser.rejected]: (state) => {
+    [sendComment.rejected]: (state) => {
       state.isLoading = false;
     },
   },
 });
 
-export const {} = signUpSlice.actions;
-export default signUpSlice.reducer;
+export const {} = commentSlice.actions;
+export default commentSlice.reducer;

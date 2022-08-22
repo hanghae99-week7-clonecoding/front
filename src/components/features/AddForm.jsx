@@ -1,33 +1,42 @@
 import React, { useState } from "react";
 import styles from "../css_modules/AddForm.module.css"
 import styled from 'styled-components'
+import { useDispatch } from "react-redux";
+import { postWritesThunk } from '../../redux/modules/addFormSlice'
 
 const AddForm = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState()
     const [category, setCategory] = useState()
-    const [img, setImg] = useState()
+    const dispatch = useDispatch()
 
     const changeTitle = (e) => {
         setTitle(e.target.value)
     }
-    console.log(title)
+    // console.log(title)
 
     const changeContent = (e) => {
         setContent(e.target.value)
     }
-    console.log(content)
+    // console.log(content)
 
     const changeCategory = (e) => {
         setCategory(e.target.value)
     }
-    console.log(category)
+    // console.log(category)
 
-    const changeImg = (e) => {
-        const uploadImg = e.target.files;
-        setImg(uploadImg)
+    const addPost = () => {
+        const data = new FormData();
+        data.append('title', title)
+        data.append('content', content)
+        data.append('category', category)
+
+        // FormData의 value 확인
+        for (let value of data.values()) {
+            console.log(value);
+        }
+        dispatch(postWritesThunk(data))
     }
-    console.log(changeImg)
 
     return (
         // 타이틀 
@@ -57,12 +66,12 @@ const AddForm = () => {
                     <span className={styles.add}>자세히 알아보기</span>
                     <br />
                     <div className={styles.fileUpload}>
-                        <div className={styles.textBox3}>미리보기 이미지 업로드</div>
-                        <input onChange={changeImg} id="img" type="file" accept=".png, .jgp, .png, .jpeg" className={styles.textBox3} />
+                        <label htmlFor="input_img" className={styles.textBox3}>미리보기 이미지 업로드</label>
+                        <div id="img" type="file" accept=".png, .jgp, .png, .jpeg" className={styles.textBox3} />
                     </div>
                 </div>
                 {/* 카테고리 선택부분 */}
-                <br /> 
+                <br />
                 <div>
                     <div>
                         <div>카테고리</div>
@@ -89,9 +98,9 @@ const AddForm = () => {
                             height="315"
                             src="https://www.youtube.com/embed/5ch94AaPZRQ?autoplay=1&mute=1"
                             title="YouTube video player"
-                            frameborder="0"
+                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
+                            allowFullScreen
                         ></iframe>
                     </div>
                     <div>
@@ -109,7 +118,13 @@ const AddForm = () => {
                     </div>
                     {/* 업로드 버튼 */}
                     <div width="100%">
-                        <button className={styles.button}>게시글 등록</button>
+                        <button
+                            disabled={
+                                title === '' ||
+                                content === '' ||
+                                category === '선택' ? true : false
+                            }
+                            onClick={() => addPost()} className={styles.button}>게시글 등록</button>
                     </div>
                 </div>
             </div>

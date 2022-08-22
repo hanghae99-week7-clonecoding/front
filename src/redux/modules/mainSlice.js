@@ -1,8 +1,7 @@
 import axios from "axios";
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   lists: [],
-
   isLoading: false,
   error: null,
 };
@@ -10,9 +9,10 @@ const initialState = {
 export const __getMovie = createAsyncThunk(
   "lists/getMovie",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
-      const data = await axios.get(`http://localhost:3001/`);
+      const data = await axios.get(
+        `http://localhost:3001/lists/?page=${payload}`
+      );
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -32,23 +32,25 @@ export const __getTitle = createAsyncThunk(
   }
 );
 
-export const MovieSlice = createSlice({
-  name: "MovieList",
+export const mainSlice = createSlice({
+  name: "mainSlice",
   initialState,
   reducers: {},
   extraReducers: {
-    [__getMovie.pending]: (state) => {},
+    [__getMovie.pending]: (state) => {
+      state.isLoading = true;
+    },
     [__getMovie.fulfilled]: (state, action) => {
-      state.lists.push(action.payload);
-      console.log(current(state), action);
+      state.lists = [...state.lists].concat(action.payload);
+      state.isLoading = false;
+    },
+    [__getMovie.rejected]: (state, action) => {
+      state.isLoading = false;
     },
     [__getTitle.pending]: (state) => {},
-    [__getTitle.fulfilled]: (state, action) => {
-      state.lists.push(action.payload);
-      console.log(current(state), action);
-    },
+    [__getTitle.fulfilled]: (state, action) => {},
   },
 });
 
-export const {} = MovieSlice.actions;
-export default MovieSlice.reducer;
+export const {} = mainSlice.actions;
+export default mainSlice.reducer;

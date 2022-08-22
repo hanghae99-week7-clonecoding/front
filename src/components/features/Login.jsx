@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../css_modules/Login.module.css";
 import { __postLogin } from "../../redux/modules/loginSlice";
 import { useDispatch } from "react-redux";
+
 const Login = () => {
   // const dispatch = useDispatch();
   const [login, Setlogin] = useState({
@@ -23,9 +24,9 @@ const Login = () => {
       <form onSubmit={onSubmitHandler} className={styles.LoginInput}>
         <div className={styles.LoginLogoBox}>
           <img
-            style={{ width: "150px" }}
-            src="https://github.com/zzinao/cloneProjectReact/blob/zzinao/src/shared/img/google_logo.png?raw=true"
-            alt="구글로고"
+            style={{ width: "150px", height: "80px" }}
+            src="/img/logo2.png"
+            alt="유튜브사진"
           ></img>
           <p className={styles.fristName}>Sign in</p>
           <p>Use your Google Account</p>

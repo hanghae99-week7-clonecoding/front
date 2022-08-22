@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Btn from "../elements/Btn";
 import styles from "../css_modules/SignUp.module.css";
 import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/modules/signUpSlice";
 //기본 이미지 import
 import base_img from "../../res/img/base_profile.jpeg";
 import yt_logo from "../../res/img/yt_logo.png";
@@ -9,13 +10,14 @@ import yt_logo from "../../res/img/yt_logo.png";
 const SignUp = () => {
   const initialState = {
     email: "",
-    userimg: "",
+    userimage: "test",
     channel: "",
     password: "",
     confirmPassword: "",
   };
   //HOOK
   const inputRef = useRef();
+  const dispatch = useDispatch();
   const [idState, setIdState] = useState(false);
   const [signUp, setSignUp] = useState(initialState);
   const [imgFile, setImgFile] = useState("");
@@ -31,8 +33,7 @@ const SignUp = () => {
   // 채널명 특수문자 제외, 한글 가능 3~15자리
   const idRule = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   const pwRule = /^[a-zA-Z0-9]{6,20}$/;
-  const channerRule =
-    /^[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]+[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9]{3,15}$/g;
+  const channerRule = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9]{3,15}$/;
 
   //ID 중복 확인
   //const dispatch = useDispatch();
@@ -65,6 +66,7 @@ const SignUp = () => {
           "채녈명은 특수문자를 포함할 수 없으며, 3~15글자로 입력할 수 있습니다."
         );
       } else if (channerRule.test(value)) {
+        console.log("rrr");
         setchannelMsg("사용가능한 채널명입니다.");
       }
     }
@@ -95,16 +97,22 @@ const SignUp = () => {
     // 모든 유효성을 통과하면 setSignUp에 쌓임
     setSignUp({ ...signUp, [name]: value });
   };
+  //이미지 파일 체인지 핸들러
   const onLoadImg = (event) => {
     //현재 이미지 파일
-    const imageFile = event.target.files[0];
+    const imaFile = event.target.files[0];
     //선택한 이미지 파일의 url
-    const imageUrl = URL.createObjectURL(imageFile);
+    const imageUrl = URL.createObjectURL(imaFile);
     setImgFile(imageUrl);
-    // setSignUp({ userimg: imageUrl });
+    console.log(imageUrl[0]);
   };
+  //등록하기
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    const formdata = new FormData();
+    // formdata.append("data", signUp); //텍스트
+    formdata.append("file", imgFile); //이미지
+    dispatch(addUser(signUp));
   };
 
   return (
@@ -112,6 +120,7 @@ const SignUp = () => {
       onSubmit={onSubmitHandler}
       className={styles.joinWarp}
       autoComplete="off"
+      // encType="multipart/form-data"
     >
       <img className={styles.yt_logo} src={yt_logo} alt="로고" />
       <h2>회원가입</h2>

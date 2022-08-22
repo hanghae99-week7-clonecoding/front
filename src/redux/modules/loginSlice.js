@@ -1,5 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import instance from "../../res/instance";
+import { setCookie } from "../../res/cookie";
 const initialState = {
   users: [],
   isLoading: false,
@@ -11,7 +13,11 @@ export const __postLogin = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      const data = await axios.post(`http://localhost:3001/`);
+      const data = await instance.post(`/user/login`, payload);
+      const token = data.data.token;
+      console.log(token);
+      setCookie("jwtToken", `${token}`);
+      console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -20,14 +26,13 @@ export const __postLogin = createAsyncThunk(
 );
 
 export const LoginSlice = createSlice({
-  name: "MovieList",
+  name: "userlogin",
   initialState,
   reducers: {},
   extraReducers: {
     [__postLogin.pending]: (state) => {},
     [__postLogin.fulfilled]: (state, action) => {
-      state.users.push(action.payload);
-      console.log(current(state), action);
+      console.log(action.payload);
     },
   },
 });

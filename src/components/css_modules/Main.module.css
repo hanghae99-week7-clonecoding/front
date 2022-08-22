@@ -2,6 +2,24 @@
   width: 100%;
   margin: 0 auto;
   z-index: 999;
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+}
+.NavBox {
+  width: 5%;
+  height: 100vh;
+  background-color: white;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.NavBox > div {
+  height: 50px;
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+  top: -200px;
 }
 .Category {
   width: 100%;
@@ -15,6 +33,7 @@
   align-items: center;
   position: fixed;
   top: 52px;
+  border-bottom: 1px solid #eeee;
 }
 .Category > button {
   width: 63px;

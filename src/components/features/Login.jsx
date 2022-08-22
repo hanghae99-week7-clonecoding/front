@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import styles from "../css_modules/Login.module.css";
 import { __postLogin } from "../../redux/modules/loginSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  // const dispatch = useDispatch();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
   const [login, Setlogin] = useState({
     email: "",
     password: "",
@@ -18,6 +21,11 @@ const Login = () => {
     if (login.email.trim() === "" || login.password.trim() === "") {
       return alert("모든 항목을 입력해주세요.");
     }
+    dispatch(__postLogin(login));
+    Setlogin({
+      email: "",
+      password: "",
+    });
   };
   return (
     <div className={styles.LoginBox}>
@@ -35,15 +43,24 @@ const Login = () => {
           name="email"
           onChange={onChangeHandler}
           placeholder="이메일"
+          value={login.email}
         ></input>
         <input
           name="password"
           type="password"
           onChange={onChangeHandler}
           placeholder="비밀번호"
+          value={login.password}
+          autoComplete="off"
         ></input>
         <div className={styles.signBox}>
-          <div>Create account</div>
+          <div
+            onClick={() => {
+              navigation("/sign");
+            }}
+          >
+            Create account
+          </div>
           <button>로그인!</button>
         </div>
       </form>

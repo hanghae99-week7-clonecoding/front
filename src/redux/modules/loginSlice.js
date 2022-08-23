@@ -13,13 +13,16 @@ export const __postLogin = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      const data = await instance.post(`/user/login`, payload);
+      const data = await instance.post(`/user/login`, payload.login);
       const token = data.data.token;
-      console.log(token);
       setCookie("jwtToken", `${token}`);
-      console.log(data.data);
+      if (data.data.result) {
+        alert("로그인 성공합니다");
+        payload.navigation("/");
+      }
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }

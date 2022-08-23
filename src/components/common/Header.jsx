@@ -56,7 +56,12 @@ const Header = () => {
         </form>
         <div className={styles.HeaderSerch}>
           <div>
-            <FontAwesomeIcon></FontAwesomeIcon>
+            <FontAwesomeIcon
+              onClick={(e) => {
+                // console.log(e.target.id)
+                navigate("/addform", { state: { add: 'add' } })
+              }}
+              id="add" icon={faCamera}></FontAwesomeIcon>
           </div>
           {token ? (
             <div

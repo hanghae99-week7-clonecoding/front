@@ -12,7 +12,7 @@ import Btn from "../elements/Btn";
 //DetailRight
 import DetailRight from "./DetailRight";
 
-const Detail = ({ children }) => {
+const Detail = ({ children, token }) => {
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -54,6 +54,12 @@ const Detail = ({ children }) => {
               <Btn>
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
+              {!token ? (
+                <div>
+                  <Btn>수정</Btn>
+                  <Btn>삭제</Btn>
+                </div>
+              ) : null}
             </span>
           </div>
         </div>

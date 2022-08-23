@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Header.module.css";
 import styled from "styled-components";
 import Nav from "./Nav";
@@ -7,11 +7,20 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { getCookie, removeCookie } from "../../res/cookie";
 
 const Header = () => {
   const navigate = useNavigate();
   const [menu, Setmenu] = useState(false);
   const [visible, Setvisible] = useState(false);
+  const token = getCookie("jwtToken");
+  const [loginState, setLoginState] = useState(false);
+  const logoutHandler = () => {
+    removeCookie("jwtToken");
+  };
+  useEffect(() => {
+    token ? setLoginState(true) : setLoginState(false);
+  }, [token]);
   return (
     <div>
       <div className={styles.HeaderBox}>
@@ -47,15 +56,26 @@ const Header = () => {
         </form>
         <div className={styles.HeaderSerch}>
           <div>
-            <FontAwesomeIcon icon={faCamera}></FontAwesomeIcon>
+            <FontAwesomeIcon></FontAwesomeIcon>
           </div>
-          <div
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            로그인
-          </div>
+          {token ? (
+            <div
+              onClick={() => {
+                logoutHandler();
+                navigate("/");
+              }}
+            >
+              로그아웃
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              로그인
+            </div>
+          )}
         </div>
       </div>
 

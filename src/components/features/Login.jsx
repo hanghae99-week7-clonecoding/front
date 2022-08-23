@@ -21,7 +21,7 @@ const Login = () => {
     if (login.email.trim() === "" || login.password.trim() === "") {
       return alert("모든 항목을 입력해주세요.");
     }
-    dispatch(__postLogin(login));
+    dispatch(__postLogin({ login, navigation }));
     Setlogin({
       email: "",
       password: "",

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import instance from "../../res/instance";
 const initialState = {
   lists: [],
   isLoading: false,
@@ -18,10 +19,21 @@ export const __getMovie = createAsyncThunk(
     }
   }
 );
+export const __getCategory = createAsyncThunk(
+  "lists/Category",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const data = await instance.get(`post/serch/${payload}`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __getTitle = createAsyncThunk(
   "lists/getTitle",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const data = await axios.post(`http://localhost:3001/`);
       return thunkAPI.fulfillWithValue(data.data);
@@ -41,6 +53,13 @@ export const mainSlice = createSlice({
     },
     [__getMovie.fulfilled]: (state, action) => {
       state.lists = [...state.lists].concat(action.payload);
+      state.isLoading = false;
+    },
+    [__getCategory.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getCategory.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.isLoading = false;
     },
     [__getMovie.rejected]: (state, action) => {

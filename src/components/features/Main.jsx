@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Main.module.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getMovie } from "../../redux/modules/mainSlice";
+import { __getMovie, __getCategory } from "../../redux/modules/mainSlice";
 import ReactPlayer from "react-player/lazy";
 import { useInView } from "react-intersection-observer";
+
 const Main = () => {
   const [ref, inview] = useInView(); //보이면 true,안보이면 faluse
   const [page, setPage] = useState(1); //페이지수
   const { lists, isLoading } = useSelector((state) => state.main);
+  const [category, Setcategory] = useState({
+    category: "",
+  });
   const dispatch = useDispatch();
   console.log(lists);
   useEffect(() => {
@@ -21,7 +25,7 @@ const Main = () => {
   }, [inview]);
   const onClickHandler = (event) => {
     const { id } = event.target;
-    console.log(id);
+    dispatch(__getCategory(id));
   };
 
   console.log(inview);

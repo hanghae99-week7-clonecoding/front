@@ -11,8 +11,10 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import Btn from "../elements/Btn";
 //DetailRight
 import DetailRight from "./DetailRight";
+import { useNavigate } from "react-router-dom";
 
 const Detail = ({ children, token }) => {
+  const navigate = useNavigate
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -56,7 +58,12 @@ const Detail = ({ children, token }) => {
               </Btn>
               {!token ? (
                 <div>
-                  <Btn>수정</Btn>
+                  <Btn
+                    onClick={(e) => {
+                      // console.log(e.target.id)
+                      navigate("/addform", {state: { add: 'edit'}})
+                    }}
+                  >수정</Btn>
                   <Btn>삭제</Btn>
                 </div>
               ) : null}

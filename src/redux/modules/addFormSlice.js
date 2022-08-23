@@ -1,13 +1,16 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import instance from "../../res/instance";
+import { getCookie } from "../../res/cookie.js";
 
 export const postWritesThunk = createAsyncThunk(
   "addForm/getAddForm",
   async (payload, thunkAPI) => {
-    console.log(payload)
 
-    // 페이로드 확인을 위해 주석처리 
+    console.log(payload)
+    console.log(instance.defaults.headers.token)
+    console.log(getCookie("jwtToken"))
+
     try {
       const response = await instance.post('post',payload);
   

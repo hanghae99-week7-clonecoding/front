@@ -47,7 +47,7 @@ const Header = () => {
         </form>
         <div className={styles.HeaderSerch}>
           <div>
-            <FontAwesomeIcon icon={faCamera}></FontAwesomeIcon>
+            <FontAwesomeIcon></FontAwesomeIcon>
           </div>
           <div
             onClick={() => {

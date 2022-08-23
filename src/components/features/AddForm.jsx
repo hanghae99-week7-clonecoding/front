@@ -3,33 +3,45 @@ import styles from "../css_modules/AddForm.module.css"
 import styled from 'styled-components'
 import { useDispatch } from "react-redux";
 import { postWritesThunk } from '../../redux/modules/addFormSlice'
+import { useLocation } from "react-router-dom";
 
 const AddForm = () => {
-    const [title, setTitle] = useState('')
+    const { state } = useLocation()
+    // console.log(state.add)
+    const [title, setTitle] = useState(
+        state.add === 'add' ? '' : state.title
+    )
     const [content, setContent] = useState()
     const [category, setCategory] = useState()
+    const [file, setFile] = useState([])
     const dispatch = useDispatch()
 
     const changeTitle = (e) => {
         setTitle(e.target.value)
     }
-    // console.log(title)
+    console.log(title)
 
     const changeContent = (e) => {
         setContent(e.target.value)
     }
-    // console.log(content)
+    console.log(content)
 
     const changeCategory = (e) => {
         setCategory(e.target.value)
     }
-    // console.log(category)
+    console.log(category)
+
+    const onChangeHandler = (e) => {
+        console.log(e.target.files)
+        setFile(e.target.files)
+    }
 
     const addPost = () => {
         const data = new FormData();
         data.append('title', title)
-        data.append('content', content)
+        data.append('discription', content)
         data.append('category', category)
+        data.append('file', file[0])     
 
         // FormData의 value 확인
         for (let value of data.values()) {
@@ -38,23 +50,33 @@ const AddForm = () => {
         dispatch(postWritesThunk(data))
     }
 
+    // 수정 파트
+    // const editPost = () => {
+    //     const data = new FormData();
+    //     data.append('title', title)
+    //     data.append('description', content)
+    //     data.append('category', category) 
+
+    //     dispatch()
+    // }
+
     return (
         // 타이틀 
         <div className={styles.addFormBox}>
             <div className={styles.textBox}>
                 <div>
-                    <h2>세부정보</h2>
+                    <h2>{ state.add === 'add' ? '세부사항' : '세부사항 수정' }</h2>
                 </div>
                 {/* 동영상 제목, 설명 입력칸 */}
                 <div>
                     <div className={styles.textBox2}>
                         <div className={styles.subTitle}>제목(필수 항목)
                         </div>
-                        <input onChange={changeTitle} type="text" placeholder="동영상을 설명하는 제목 추가"></input>
+                        <input onChange={changeTitle} type="text" placeholder="동영상을 설명하는 제목 추가" defaultValue={state.add === 'add' ? null : title }></input>
                     </div>
                     <div className={styles.textBox2}>
                         <div className={styles.subTitle}>설명</div>
-                        <textarea onChange={changeContent} rows="5" placeholder="시청자에게 동영상에 대해 이야기하기"></textarea>
+                        <textarea onChange={changeContent} rows="5"  placeholder="시청자에게 동영상에 대해 이야기하기"></textarea>
                     </div>
                 </div>
                 {/* 동영상 썸네일 업로드 칸 */}
@@ -76,14 +98,13 @@ const AddForm = () => {
                     <div>
                         <div>카테고리</div>
                         <div className={styles.subscribe}>카테고리를 선택해 추가하세요. 카테고리 별로 동영상을 찾기 쉬워집니다.</div>
-                        <select onChange={changeCategory} className={styles.selectBox}>
+                        <select onChange={changeCategory}  className={styles.selectBox}>
                             <option value="">선택</option>
                             <option value="음악">음악</option>
                             <option value="요리">요리</option>
                             <option value="스포츠">스포츠</option>
-                            <option value="게임">게임</option>
                             <option value="여행">여행</option>
-                            <option value="학습">학습</option>
+                            <option value="게임">게임</option>
                             <option value="기타">기타</option>
                         </select>
                     </div>
@@ -110,11 +131,16 @@ const AddForm = () => {
                         <label className={styles.upload} htmlFor="input_file">
                             업로드
                         </label>
-                        <input
-                            id="input_file"
-                            type="file"
-                            accept=".mp4"
-                        ></input>
+                        <form encType='multipart/form-data'>
+                            <input
+                                onChange={onChangeHandler}
+                                id="input_file"
+                                type="file"
+                                accept=".mp4"
+                                name="file"
+                            ></input>                            
+                        </form>
+
                     </div>
                     {/* 업로드 버튼 */}
                     <div width="100%">
@@ -122,7 +148,8 @@ const AddForm = () => {
                             disabled={
                                 title === '' ||
                                 content === '' ||
-                                category === '선택' ? true : false
+                                category === '선택' ||
+                                file === '' ? true : false
                             }
                             onClick={() => addPost()} className={styles.button}>게시글 등록</button>
                     </div>
@@ -136,3 +163,4 @@ export default AddForm;
 
 // 제목 입력 안 됐을 때 유효성 검사
 // 물음표 아이콘 
+// 동영상 제외 제목, 내용, 카테고리 수정만 

@@ -26,14 +26,15 @@ export const checkDoubleId = createAsyncThunk(
       const responseData = await instance.post("user/check_Id", {
         email: payload.email,
       });
-      console.log(responseData.data.data.result);
-      if (responseData.data.data.result) {
-        return payload.setIdMsg("사용가능한 아이디 입니다.");
-      } else {
-        return payload.setIdMsg("중복된 아이디 입니다.");
+      console.log(responseData.data.result);
+      if (responseData.data.result) {
+        payload.setIdMsg("사용가능한 아이디 입니다.");
       }
-      // return responseData.data;
+      return thunkAPI.fulfillWithValue(responseData.data);
     } catch (error) {
+      if (error.response.data.result == false) {
+        payload.setIdMsg("중복된 아이디입니다");
+      }
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -58,14 +59,12 @@ export const signUpSlice = createSlice({
       state.isLoading = true;
     },
     [checkDoubleId.fulfilled]: (state, action) => {
-      state.result = action.payload.result;
-      state.message = action.payload.setIdMsg;
       state.isLoading = false;
+      console.log(action.payload);
     },
     [checkDoubleId.rejected]: (state, action) => {
       state.isLoading = false;
-      state.result = action.payload.response.data.result;
-      state.message = action.payload.response.data.message;
+      console.log(action.payload);
     },
   },
 });

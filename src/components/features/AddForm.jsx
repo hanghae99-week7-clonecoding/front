@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "../css_modules/AddForm.module.css"
-import styled from 'styled-components'
+import styles from "../css_modules/AddForm.module.css";
+import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { postWritesThunk } from '../../redux/modules/addFormSlice'
 import { useLocation } from "react-router-dom";
@@ -49,7 +49,6 @@ const AddForm = () => {
         }
         dispatch(postWritesThunk(data))
     }
-
     // 수정 파트
     // const editPost = () => {
     //     const data = new FormData();
@@ -155,12 +154,63 @@ const AddForm = () => {
                     </div>
                 </div>
             </div>
+            <select onChange={changeCategory} className={styles.selectBox}>
+              <option value="">선택</option>
+              <option value="음악">음악</option>
+              <option value="요리">요리</option>
+              <option value="스포츠">스포츠</option>
+              <option value="게임">게임</option>
+              <option value="여행">여행</option>
+              <option value="학습">학습</option>
+              <option value="기타">기타</option>
+            </select>
+          </div>
         </div>
-    )
-}
+      </div>
+      {/* 업로드 될 동영상 미리보기 부분 */}
+      <div>
+        <div>
+          <div>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/5ch94AaPZRQ?autoplay=1&mute=1"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div>{/* <div>파일 이름</div> */}</div>
+          <div className={styles.fileUpload}>
+            <label className={styles.upload} htmlFor="input_file">
+              업로드
+            </label>
+            <input id="input_file" type="file" accept=".mp4"></input>
+          </div>
+          {/* 업로드 버튼 */}
+          <div width="100%">
+            <button
+              disabled={
+                title === "" || content === "" || category === "선택"
+                  ? true
+                  : false
+              }
+              onClick={() => addPost()}
+              className={styles.button}
+            >
+              게시글 등록
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default AddForm;
 
 // 제목 입력 안 됐을 때 유효성 검사
 // 물음표 아이콘 
 // 동영상 제외 제목, 내용, 카테고리 수정만 
+

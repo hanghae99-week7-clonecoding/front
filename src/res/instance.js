@@ -7,8 +7,8 @@ const instance = axios.create({
 
   headers: { token: `${getCookie("jwtToken")}` },
   withCredentials: true,
-
 });
+
 // if (getToken) {
 //   instance.defaults.headers.commㅛㅁ규ㅜ ㄴㅅon["token"] = `Bearer ${getToken}`;
 // }

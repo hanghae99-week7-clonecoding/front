@@ -16,7 +16,6 @@ const DetailRight = () => {
   const { lists, isLoading } = useSelector((state) => state.main);
 
   useEffect(() => {
-    console.log(page);
     dispatch(__getMovie(page));
   }, [page]);
   useEffect(() => {

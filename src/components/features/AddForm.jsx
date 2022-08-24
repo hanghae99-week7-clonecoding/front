@@ -3,10 +3,11 @@ import styles from "../css_modules/AddForm.module.css";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { postWritesThunk, postEditThunk } from "../../redux/modules/addFormSlice";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AddForm = () => {
     const { state } = useLocation()
+    const navigate = useNavigate();
 
     const [title, setTitle] = useState(
         state.add === 'add' ? '' : state.data.title
@@ -52,6 +53,7 @@ const AddForm = () => {
             console.log(value);
         }
         dispatch(postWritesThunk(data));
+        navigate("/")
     };
 
     // 수정 파트
@@ -62,6 +64,7 @@ const AddForm = () => {
         data.category = category
 
         dispatch(postEditThunk({id : state.data.postId, data: data}))
+        navigate("/")
     }
     return (
         // 타이틀 
@@ -169,4 +172,4 @@ const AddForm = () => {
 
 export default AddForm;
 
-// 남은 일 1. 등록 후 메인으로 이동하게 2. post/:id 여기 값 가져오기
+// 남은 일 1. 등록 후 메인으로 이동하게 2. 수정 후 상세페이지로 이동하게

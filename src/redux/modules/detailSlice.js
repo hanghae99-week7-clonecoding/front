@@ -16,6 +16,19 @@ export const getDetailData = createAsyncThunk(
     }
   }
 );
+export const goodDetail = createAsyncThunk(
+  "detailSlice/goodDetail",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const responseData = await instance.post(`like/${payload}`);
+      payload.useEffect(() => {}, []);
+      return responseData.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const goodDetail = createAsyncThunk(
   "detailSlice/goodDetail",
@@ -86,6 +99,7 @@ export const detailSlice = createSlice({
     [getDeleteForm.fulfilled]: (state, action) => {
       state.result = action.payload;
     },
+
   },
 });
 

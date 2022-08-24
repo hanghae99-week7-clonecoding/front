@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Detail.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   getDetailData,
   getDeleteForm,
   getSubscribe,
   goodDetail,
 } from "../../redux/modules/detailSlice";
+
 
 //컴포넌트
 import Comment from "./Comment";
@@ -44,9 +46,15 @@ const Detail = ({ token, userInfo, userImg }) => {
     }
   }, []);
 
+  const onClickGoodHandler = () => {
+    dispatch(goodDetail(id));
+  };
+
+
   const moveAddForm = () => {
     navigate("/addform", { state: { add: "edit", data: result, postId: id } });
   };
+
   const deleteForm = (event) => {
     dispatch(getDeleteForm(id));
     navigate("/");
@@ -58,6 +66,7 @@ const Detail = ({ token, userInfo, userImg }) => {
   const onClickGoodHandler = () => {
     dispatch(goodDetail(id));
   };
+
 
   return (
     <div className={styles.detailWrap}>
@@ -83,9 +92,9 @@ const Detail = ({ token, userInfo, userImg }) => {
             <span>
               <Btn style={{ display: "flex" }} onClick={onClickGoodHandler}>
                 <FontAwesomeIcon icon={faThumbsUp} />
-                좋아요
                 {result.like}
               </Btn>
+
               <Btn>
                 <FontAwesomeIcon icon={faThumbsDown} />
                 싫어요
@@ -104,8 +113,10 @@ const Detail = ({ token, userInfo, userImg }) => {
 
               {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
+
                   <Btn onClick={moveAddForm}>수정</Btn>
                   <Btn onClick={deleteForm}>삭제</Btn>
+
                 </span>
               ) : null}
             </span>

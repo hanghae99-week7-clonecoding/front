@@ -29,7 +29,9 @@ export const getComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const responseData = await instance.get(`comment/${payload.postId}`);
+      console.log(responseData.data)
       return responseData.data;
+      
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

@@ -25,6 +25,7 @@ const Detail = ({ children, token, userInfo }) => {
   console.log(token, userInfo);
   //Hook
   const { id } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate;
   const { isLoading, result } = useSelector((state) => state.detail);
@@ -34,6 +35,7 @@ const Detail = ({ children, token, userInfo }) => {
       dispatch(getDetailData(id));
     }
   }, []);
+
 
   return (
     <div className={styles.detailWrap}>
@@ -76,14 +78,17 @@ const Detail = ({ children, token, userInfo }) => {
               <Btn>
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
+
               {token !== undefined && userInfo === result.channel ? (
+
                 <div>
-                  <Btn
+              <Btn
                     onClick={(e) => {
+
                       navigate("/addform", {
                         state: { add: "edit", data: result },
                       });
-                    }}
+
                     backgroundColor="red"
                   >
                     수정

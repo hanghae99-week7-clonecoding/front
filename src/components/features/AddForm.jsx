@@ -11,8 +11,12 @@ const AddForm = () => {
     const [title, setTitle] = useState(
         state.add === 'add' ? '' : state.title
     )
-    const [content, setContent] = useState()
-    const [category, setCategory] = useState()
+    const [content, setContent] = useState(
+        state.add === 'add' ? '' : state.content
+    )
+    const [category, setCategory] = useState(
+        state.add === 'add' ? '' : state.category
+    )
     const [file, setFile] = useState([])
     const dispatch = useDispatch()
 
@@ -75,7 +79,7 @@ const AddForm = () => {
                     </div>
                     <div className={styles.textBox2}>
                         <div className={styles.subTitle}>설명</div>
-                        <textarea onChange={changeContent} rows="5" placeholder="시청자에게 동영상에 대해 이야기하기"></textarea>
+                        <textarea onChange={changeContent} rows="5" placeholder="시청자에게 동영상에 대해 이야기하기" defaultValue={state.add === 'add' ? null : content}></textarea>
                     </div>
                 </div>
                 {/* 동영상 썸네일 업로드 칸 */}
@@ -97,7 +101,7 @@ const AddForm = () => {
                     <div>
                         <div>카테고리</div>
                         <div className={styles.subscribe}>카테고리를 선택해 추가하세요. 카테고리 별로 동영상을 찾기 쉬워집니다.</div>
-                        <select onChange={changeCategory} className={styles.selectBox}>
+                        <select onChange={changeCategory} className={styles.selectBox} defaultValue={state.add === 'add' ? null : category}>
                             <option value="">선택</option>
                             <option value="음악">음악</option>
                             <option value="요리">요리</option>
@@ -146,9 +150,9 @@ const AddForm = () => {
                         <button
                             disabled={
                                 title === '' ||
-                                    content === '' ||
-                                    category === '선택' ||
-                                    file === '' ? true : false
+                                content === '' ||
+                                category === '선택' ||
+                                file === '' ? true : false
                             }
                             onClick={() => addPost()} className={styles.button}>게시글 등록</button>
                     </div>
@@ -160,7 +164,7 @@ const AddForm = () => {
 
 export default AddForm;
 
-// 제목 입력 안 됐을 때 유효성 검사
+// 버튼 disabled 속성 넣어서 내용 다 안넣으면 안 눌리게 하가 ** 중요 **
 // 물음표 아이콘 
 // 동영상 제외 제목, 내용, 카테고리 수정만 
 

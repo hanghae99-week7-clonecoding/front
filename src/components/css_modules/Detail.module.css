@@ -80,6 +80,7 @@
 }
 .btnWrap {
   display: flex;
+  justify-content: flex-end;
 }
 /* ---상세보기 유저 채널명 및 해당 게시글 소개  env----- */
 

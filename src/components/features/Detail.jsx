@@ -77,8 +77,7 @@ const Detail = ({ token, userInfo }) => {
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
 
-              {token !== undefined &&
-              JSON.parse(userInfo) === result.channel ? (
+              {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
                   <Btn
                     onClick={(e) => {

@@ -14,12 +14,16 @@ const Header = () => {
   const [menu, Setmenu] = useState(false);
   const [visible, Setvisible] = useState(false);
   const token = getCookie("jwtToken");
+  const userImg = getCookie("userImg");
   const [loginState, setLoginState] = useState(false);
   const [search, Setsearch] = useState({
     search: "",
   });
+
   const logoutHandler = () => {
     removeCookie("jwtToken");
+    removeCookie("userImg");
+    removeCookie("userChannel");
   };
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -83,13 +87,16 @@ const Header = () => {
             ></FontAwesomeIcon>
           </div>
           {token ? (
-            <div
-              onClick={() => {
-                logoutHandler();
-                navigate("/");
-              }}
-            >
-              로그아웃
+            <div>
+              <img className={styles.userImg} src={userImg} alt="이미지"></img>
+              <div
+                onClick={() => {
+                  logoutHandler();
+                  navigate("/");
+                }}
+              >
+                로그아웃
+              </div>
             </div>
           ) : (
             <div

@@ -17,7 +17,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Detail = ({ children, token }) => {
   const { id } = useParams();
   console.log(id);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -59,11 +59,12 @@ const Detail = ({ children, token }) => {
               <Btn>
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
+
               {!token ? (
                 <div>
-                  <Btn
+              <Btn
                     onClick={(e) => {
-                      // console.log(e.target.id)
+                      console.log(e.target.id)
                       navigate("/addform", { state: { add: "edit" } });
                     }}
                   >

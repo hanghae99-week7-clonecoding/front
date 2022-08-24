@@ -1,15 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import instance from "../../res/instance";
-import { getCookie } from "../../res/cookie.js";
 
 export const postWritesThunk = createAsyncThunk(
   "addForm/getAddForm",
   async (payload, thunkAPI) => {
-
     try {
       const response = await instance.post("post", payload);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
+export const postEditThunk = createAsyncThunk(
+  "editForm/getEditForm",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await instance.post("post", payload);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -18,7 +27,7 @@ export const postWritesThunk = createAsyncThunk(
 );
 
 export const AddForm = createSlice({
-  name: "addForm",
+  name: "postReducer",
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
@@ -27,7 +36,13 @@ export const AddForm = createSlice({
       .addCase(postWritesThunk.fulfilled, (state, action) => {
         state.data.push(action.payload);
       })
-      .addCase(postWritesThunk.rejected, (state, action) => {});
+      .addCase(postWritesThunk.rejected, (state, action) => {})
+      
+      .addCase(postEditThunk.pending, (state, action) => {})
+      .addCase(postEditThunk.fulfilled, (state, action) => {
+        state.data.push(action.payload);
+      })
+      .addCase(postEditThunk.rejected, (state, action) => {});
   },
 });
 

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styles from "../css_modules/AddForm.module.css";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { postWritesThunk } from "../../redux/modules/addFormSlice";
+import { postWritesThunk, postEditThunk } from "../../redux/modules/addFormSlice";
 import { useLocation } from "react-router-dom";
 
 const AddForm = () => {
 
     const { state } = useLocation()
-    // console.log(state.add)
+
     const [title, setTitle] = useState(
         state.add === 'add' ? '' : state.title
     )
@@ -54,13 +54,16 @@ const AddForm = () => {
         }
         dispatch(postWritesThunk(data));
     };
-    // 수정 파트
-    // const editPost = () => {
-    //     const data = new FormData();
-    //     data.append('title', title)
-    //     data.append('description', content)
-    //     data.append('category', category)
 
+    // 수정 파트
+    const editPost = () => {
+        const data = new FormData();
+        data.append('title', title)
+        data.append('description', content)
+        data.append('category', category)
+
+        dispatch(postEditThunk(data))
+    }
     return (
         // 타이틀 
         <div className={styles.addFormBox}>
@@ -115,7 +118,7 @@ const AddForm = () => {
             <div>
                 <div>
                     <div>
-                        <iframe
+                        {/* <iframe
                             width="560"
                             height="315"
                             src="https://www.youtube.com/embed/5ch94AaPZRQ?autoplay=1&mute=1"
@@ -123,7 +126,7 @@ const AddForm = () => {
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
-                        ></iframe>
+                        ></iframe> */}
                     </div>
                     <div>
                         {/* <div>파일 이름</div> */}
@@ -145,14 +148,22 @@ const AddForm = () => {
                     </div>
                     {/* 업로드 버튼 */}
                     <div width="100%">
+                    {state.add === 'add' ?
                         <button
                             disabled={
                                 title === '' ||
-                                    content === '' ||
-                                    category === '선택' ||
-                                    file === '' ? true : false
+                                content === '' ||
+                                category === '선택' ||
+                                file === '' ? true : false
                             }
-                            onClick={() => addPost()} className={styles.button}>게시글 등록</button>
+                            onClick={() => addPost()} className={styles.button}>게시글 등록</button> :
+                        <button
+                            disabled={
+                                title === '' ||
+                                content === '' ||
+                                category === '선택' ? true : false
+                            }
+                            onClick={() => editPost()} className={styles.button}>게시글 수정</button>}
                     </div>
                 </div>
             </div>
@@ -161,3 +172,5 @@ const AddForm = () => {
 };
 
 export default AddForm;
+
+// 남은 일 1. 수정 테스트 2. detail에서 값 잘 받아오는지 3. 등록 후 메인으로 이동하게 

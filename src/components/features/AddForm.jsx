@@ -6,17 +6,16 @@ import { postWritesThunk, postEditThunk } from "../../redux/modules/addFormSlice
 import { useLocation } from "react-router-dom";
 
 const AddForm = () => {
-
     const { state } = useLocation()
 
     const [title, setTitle] = useState(
-        state.add === 'add' ? '' : state.title
+        state.add === 'add' ? '' : state.data.title
     )
-    const [content, setContent] = useState(
-        state.add === 'add' ? '' : state.content
+    const [discription, setDiscription] = useState(
+        state.add === 'add' ? '' : state.data.discription
     )
     const [category, setCategory] = useState(
-        state.add === 'add' ? '' : state.category
+        state.add === 'add' ? '' : state.data.category
     )
     const [file, setFile] = useState([])
     const dispatch = useDispatch()
@@ -25,11 +24,11 @@ const AddForm = () => {
         setTitle(e.target.value);
     };
     console.log(title);
-
+    console.log(state)
     const changeContent = (e) => {
-        setContent(e.target.value);
+        setDiscription(e.target.value);
     };
-    console.log(content);
+    console.log(discription);
 
     const changeCategory = (e) => {
         setCategory(e.target.value);
@@ -44,7 +43,7 @@ const AddForm = () => {
     const addPost = () => {
         const data = new FormData();
         data.append("title", title);
-        data.append("discription", content);
+        data.append("discription", discription);
         data.append("category", category);
         data.append("file", file[0]);
 
@@ -57,12 +56,12 @@ const AddForm = () => {
 
     // 수정 파트
     const editPost = () => {
-        const data = new FormData();
-        data.append('title', title)
-        data.append('description', content)
-        data.append('category', category)
+        const data = {};
+        data.title = title
+        data.discription = discription
+        data.category = category
 
-        dispatch(postEditThunk(data))
+        dispatch(postEditThunk({id : state.data.postId, data: data}))
     }
     return (
         // 타이틀 
@@ -80,7 +79,7 @@ const AddForm = () => {
                     </div>
                     <div className={styles.textBox2}>
                         <div className={styles.subTitle}>설명</div>
-                        <textarea onChange={changeContent} rows="5" placeholder="시청자에게 동영상에 대해 이야기하기" defaultValue={state.add === 'add' ? null : content}></textarea>
+                        <textarea onChange={changeContent} rows="5" placeholder="시청자에게 동영상에 대해 이야기하기" defaultValue={state.add === 'add' ? null : discription}></textarea>
                     </div>
                 </div>
                 {/* 동영상 썸네일 업로드 칸 */}
@@ -128,9 +127,6 @@ const AddForm = () => {
                             allowFullScreen
                         ></iframe> */}
                     </div>
-                    <div>
-                        {/* <div>파일 이름</div> */}
-                    </div>
                     <div className={styles.fileUpload}>
                         <label className={styles.upload} htmlFor="input_file">
                             업로드
@@ -152,7 +148,7 @@ const AddForm = () => {
                         <button
                             disabled={
                                 title === '' ||
-                                content === '' ||
+                                discription === '' ||
                                 category === '선택' ||
                                 file === '' ? true : false
                             }
@@ -160,7 +156,7 @@ const AddForm = () => {
                         <button
                             disabled={
                                 title === '' ||
-                                content === '' ||
+                                discription === '' ||
                                 category === '선택' ? true : false
                             }
                             onClick={() => editPost()} className={styles.button}>게시글 수정</button>}
@@ -173,4 +169,4 @@ const AddForm = () => {
 
 export default AddForm;
 
-// 남은 일 1. 수정 테스트 2. detail에서 값 잘 받아오는지 3. 등록 후 메인으로 이동하게 
+// 남은 일 1. 등록 후 메인으로 이동하게 2. post/:id 여기 값 가져오기

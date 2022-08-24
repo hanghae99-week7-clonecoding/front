@@ -16,6 +16,19 @@ export const getDetailData = createAsyncThunk(
     }
   }
 );
+export const goodDetail = createAsyncThunk(
+  "detailSlice/goodDetail",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const responseData = await instance.post(`like/${payload}`);
+      payload.useEffect(() => {}, []);
+      return responseData.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const detailSlice = createSlice({
   name: "detailSlice",
@@ -30,6 +43,16 @@ export const detailSlice = createSlice({
       state.isLoading = false;
     },
     [getDetailData.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [goodDetail.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [goodDetail.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.isLoading = false;
+    },
+    [goodDetail.rejected]: (state) => {
       state.isLoading = false;
     },
   },

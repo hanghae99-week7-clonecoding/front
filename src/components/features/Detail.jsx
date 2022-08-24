@@ -3,6 +3,9 @@ import styles from "../css_modules/Detail.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetailData } from "../../redux/modules/detailSlice";
+//컴포넌트
+import Comment from "./Comment";
+import DetailRight from "./DetailRight";
 
 //fontAwsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,11 +21,7 @@ import ReactPlayer from "react-player/lazy";
 import Btn from "../elements/Btn";
 import ProfileImg from "../elements/ProfileImg";
 
-//DetailRight
-import DetailRight from "./DetailRight";
-
-const Detail = ({ children, token, userInfo }) => {
-  console.log(token, userInfo);
+const Detail = ({ token, userInfo }) => {
   //Hook
   const { id } = useParams();
 
@@ -78,20 +77,21 @@ const Detail = ({ children, token, userInfo }) => {
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
 
-              {token !== undefined && userInfo === result.channel ? (
-                <div>
+              {token !== undefined &&
+              JSON.parse(userInfo) === result.channel ? (
+                <span className={styles.btnWrap}>
                   <Btn
                     onClick={(e) => {
                       navigate("/addform", {
                         state: { add: "edit", data: result },
                       });
                     }}
-                    backgroundColor="red"
+                    backgroundColor="blue"
                   >
                     수정
                   </Btn>
-                  <Btn>삭제</Btn>
-                </div>
+                  <Btn color="red">삭제</Btn>
+                </span>
               ) : null}
             </span>
           </div>
@@ -110,7 +110,9 @@ const Detail = ({ children, token, userInfo }) => {
             구독
           </Btn>
         </div>
-        <div className="commentsArea">{children}</div>
+        <div className="commentsArea">
+          <Comment token={token} posiId={id} userInfo={userInfo} />
+        </div>
       </div>
       <div className={styles.contentRight}>
         <DetailRight />

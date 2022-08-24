@@ -61,7 +61,7 @@ const Header = () => {
                 // console.log(e.target.id)
                 navigate("/addform", { state: { add: 'add' } })
               }}
-              id="add" icon={faCamera}></FontAwesomeIcon>
+              icon={faCamera}></FontAwesomeIcon>
           </div>
           {token ? (
             <div

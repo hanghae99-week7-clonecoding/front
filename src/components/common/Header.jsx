@@ -15,9 +15,18 @@ const Header = () => {
   const [visible, Setvisible] = useState(false);
   const token = getCookie("jwtToken");
   const [loginState, setLoginState] = useState(false);
+  const [search, Setsearch] = useState({
+    search: "",
+  });
   const logoutHandler = () => {
     removeCookie("jwtToken");
   };
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    Setsearch({ ...search, [name]: value });
+    console.log(search);
+  };
+  const onSearchHandler = () => {};
   useEffect(() => {
     token ? setLoginState(true) : setLoginState(false);
   }, [token]);
@@ -46,8 +55,17 @@ const Header = () => {
           </div>
         </div>
         <form className={styles.HeaderForm}>
-          <input placeholder="검색" className={styles.HeaderInput}></input>
-          <button>
+          <input
+            name="search"
+            onChange={onChangeHandler}
+            placeholder="검색"
+            className={styles.HeaderInput}
+          ></input>
+          <button
+            onClick={() => {
+              onSearchHandler();
+            }}
+          >
             <FontAwesomeIcon
               style={{ height: "15px" }}
               icon={faMagnifyingGlass}
@@ -59,9 +77,10 @@ const Header = () => {
             <FontAwesomeIcon
               onClick={(e) => {
                 // console.log(e.target.id)
-                navigate("/addform", { state: { add: 'add' } })
+                navigate("/addform", { state: { add: "add" } });
               }}
-              icon={faCamera}></FontAwesomeIcon>
+              icon={faCamera}
+            ></FontAwesomeIcon>
           </div>
           {token ? (
             <div

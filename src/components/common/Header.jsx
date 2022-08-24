@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Header.module.css";
-import styled from "styled-components";
 import Nav from "./Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
+import { __getTitle } from "../../redux/modules/mainSlice";
 import { getCookie, removeCookie } from "../../res/cookie";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [menu, Setmenu] = useState(false);
   const [visible, Setvisible] = useState(false);
   const token = getCookie("jwtToken");
+  const userImg = getCookie("userImg");
   const [loginState, setLoginState] = useState(false);
+  const [search, Setsearch] = useState({
+    keyword: "",
+  });
+
   const logoutHandler = () => {
     removeCookie("jwtToken");
+    removeCookie("userImg");
+    removeCookie("userChannel");
+  };
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    Setsearch({ ...search, [name]: value });
+  };
+  const onSearchHandler = (event) => {
+    event.preventDefault();
+    dispatch(__getTitle(search.keyword));
+    Setsearch({
+      keyword: "",
+    });
   };
   useEffect(() => {
     token ? setLoginState(true) : setLoginState(false);
@@ -45,8 +65,14 @@ const Header = () => {
             ></img>
           </div>
         </div>
-        <form className={styles.HeaderForm}>
-          <input placeholder="검색" className={styles.HeaderInput}></input>
+        <form onSubmit={onSearchHandler} className={styles.HeaderForm}>
+          <input
+            name="keyword"
+            onChange={onChangeHandler}
+            placeholder="검색"
+            className={styles.HeaderInput}
+            value={search.keyword}
+          ></input>
           <button>
             <FontAwesomeIcon
               style={{ height: "15px" }}
@@ -59,18 +85,22 @@ const Header = () => {
             <FontAwesomeIcon
               onClick={(e) => {
                 // console.log(e.target.id)
-                navigate("/addform", { state: { add: 'add' } })
+                navigate("/addform", { state: { add: "add" } });
               }}
-              icon={faCamera}></FontAwesomeIcon>
+              icon={faCamera}
+            ></FontAwesomeIcon>
           </div>
           {token ? (
-            <div
-              onClick={() => {
-                logoutHandler();
-                navigate("/");
-              }}
-            >
-              로그아웃
+            <div>
+              <img className={styles.userImg} src={userImg} alt="이미지"></img>
+              <div
+                onClick={() => {
+                  logoutHandler();
+                  navigate("/");
+                }}
+              >
+                로그아웃
+              </div>
             </div>
           ) : (
             <div

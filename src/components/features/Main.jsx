@@ -12,8 +12,8 @@ const Main = () => {
   const [ref, inview] = useInView(); //보이면 true,안보이면 faluse
   const [page, setPage] = useState(1); //페이지수
   const { lists, isLoading } = useSelector((state) => state.main);
+
   const dispatch = useDispatch();
-  console.log(lists);
   useEffect(() => {
     dispatch(__getMovie(page));
   }, [page]);
@@ -22,21 +22,20 @@ const Main = () => {
       setPage((prevState) => prevState + 1);
     }
   }, [inview]);
-  const onClickmainHandler = () => {};
+
   const onClickHandler = (event) => {
     const { id } = event.target;
     if (id === "전체") {
-      return;
+      setPage(1);
+      dispatch(__getMovie(page));
     }
     dispatch(__getCategory(id));
   };
 
-  console.log(inview);
-  console.log(page);
   return (
     <div className={styles.CategoryBox}>
       <div className={styles.Category}>
-        <button onClick={onClickmainHandler} id="전체">
+        <button onClick={onClickHandler} id="전체">
           전체
         </button>
         <button onClick={onClickHandler} id="음악">

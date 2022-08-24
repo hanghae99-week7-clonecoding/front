@@ -61,6 +61,7 @@ const Main = () => {
         {lists.map((list, idx) => {
           return (
             <div
+              className={styles.videoWrap}
               onClick={() => {
                 navigate(`/detail/${list.postId}`);
               }}

@@ -14,8 +14,13 @@ export const sendComment = createAsyncThunk(
       const responseData = await instance.post(`comment/${payload.postId}`, {
         comment: payload.comment,
       });
-      return responseData.data;
+      if (responseData.data.ok) {
+        payload.setReultCheck(true);
+      }
     } catch (error) {
+      if (error.response.data.ok == false) {
+        payload.setReultCheck(false);
+      }
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -30,7 +35,7 @@ export const commentSlice = createSlice({
       state.isLoading = true;
     },
     [sendComment.fulfilled]: (state, action) => {
-      state.send.result = action.payload;
+      state.result = action.payload;
       state.isLoading = false;
     },
     [sendComment.rejected]: (state) => {

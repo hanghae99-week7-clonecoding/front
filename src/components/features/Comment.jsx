@@ -9,15 +9,19 @@ import baseImg from "../../res/img/base_profile.jpeg";
 //컴포넌트
 import CommentList from "./CommentList";
 
-const Comment = ({ token, posiId, userInfo }) => {
+const Comment = ({ token, postId, userInfo, userImg }) => {
   //Hook
-  const inputVal = useRef();
   const dispatch = useDispatch();
 
   //State
   const [checkBtn, setCheckBtn] = useState(false); //취소,등록버튼 보여주게 처리
+  const [resultCheck, setReultCheck] = useState(false); //componentList update 시켜줄 프롭스
+  const [text, setText] = useState("");
 
   //이벤트 함수
+  const changeText = (e) => {
+    setText(e.target.value);
+  };
   const showBtn = () => {
     if (token !== undefined) {
       return (
@@ -39,7 +43,15 @@ const Comment = ({ token, posiId, userInfo }) => {
   };
   //댓글등록하기
   const addComment = () => {
-    dispatch(sendComment({ postId: posiId, comment: inputVal.current.value }));
+    dispatch(
+      sendComment({
+        postId: postId,
+        comment: text,
+        setReultCheck,
+      })
+    );
+    setText("");
+    setReultCheck(false);
   };
 
   //리턴
@@ -50,7 +62,7 @@ const Comment = ({ token, posiId, userInfo }) => {
           <div className={styles.profile}>
             {token !== undefined ? (
               //도우님꺼 Merge 받으면 프롭스값 넣기
-              <ProfileImg height="45%" backgroundImgUrl={baseImg} />
+              <ProfileImg height="45%" backgroundImgUrl={userImg} />
             ) : (
               <ProfileImg height="45%" backgroundImgUrl={baseImg} />
             )}
@@ -58,9 +70,10 @@ const Comment = ({ token, posiId, userInfo }) => {
           <div className={styles.comment}>
             <input
               type="text"
-              ref={inputVal}
+              onChange={changeText}
               name="comment"
               placeholder="댓글추가..."
+              value={text}
               onClick={() => setCheckBtn(true)}
             />
           </div>
@@ -69,7 +82,12 @@ const Comment = ({ token, posiId, userInfo }) => {
       </div>
 
       <div className={styles.listContent}>
-        <CommentList token={token} userInfo={userInfo} id={posiId} />
+        <CommentList
+          token={token}
+          userInfo={userInfo}
+          id={postId}
+          check={resultCheck}
+        />
       </div>
     </div>
   );

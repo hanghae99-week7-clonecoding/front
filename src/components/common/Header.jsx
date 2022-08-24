@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
 import { __getTitle } from "../../redux/modules/mainSlice";
 import { getCookie, removeCookie } from "../../res/cookie";
+import ProfileImg from "../elements/ProfileImg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const Header = () => {
               icon={faBars}
             ></FontAwesomeIcon>
           </div>
-          <div className={styles.logo}>
+          <div className={styles.logo} onClick={() => navigate("/")}>
             <img
               className={styles.logoimg}
               src="/img/logo2.png"
@@ -83,8 +84,7 @@ const Header = () => {
         <div className={styles.HeaderSerch}>
           <div>
             <FontAwesomeIcon
-              onClick={(e) => {
-                // console.log(e.target.id)
+              onClick={() => {
                 navigate("/addform", { state: { add: "add" } });
               }}
               icon={faCamera}
@@ -92,7 +92,7 @@ const Header = () => {
           </div>
           {token ? (
             <div>
-              <img className={styles.userImg} src={userImg} alt="이미지"></img>
+              <ProfileImg height="45%" backgroundImgUrl={userImg} />
               <div
                 onClick={() => {
                   logoutHandler();

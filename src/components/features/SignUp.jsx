@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Btn from "../elements/Btn";
 import styles from "../css_modules/SignUp.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addUser } from "../../redux/modules/signUpSlice";
 import { checkDoubleId } from "../../redux/modules/signUpSlice";
 //기본 이미지 import
@@ -17,7 +18,6 @@ const SignUp = () => {
   };
   //HOOK
   const inputRef = useRef();
-  const checkIdResult = useSelector((state) => state.sign.result);
 
   //state
   const [checkId, setCheckId] = useState(false);
@@ -27,6 +27,7 @@ const SignUp = () => {
   const [passData, setPassData] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [imgFile, setImgFile] = useState([]);
+  const [preImgFile, setPreImgFile] = useState([]);
 
   //유효성 확인 메세지
   const [idMsg, setIdMsg] = useState("");
@@ -61,7 +62,6 @@ const SignUp = () => {
       if (idRule.test(value) && value !== "") {
         setEmailData(value);
         setCheckId(true);
-        // setIdMsg(checkIdResult ? "사용가능한 ID입니다." : "중복된 ID 입니다.");
       } else if (!idRule.test(value)) {
         setIdMsg("아이디는 이메일형식으로만 지정할 수 있습니다.");
       }
@@ -93,7 +93,6 @@ const SignUp = () => {
         setConfirmMsg("비밀번호가 다릅니다.");
       } else if (signUp.confirm === value) {
         setConfirmMsg("확인 되었습니다 :)");
-        setConfirmPass(value);
       }
     }
     // 비밀번호 확인 유효성
@@ -102,7 +101,7 @@ const SignUp = () => {
         setConfirmMsg("비밀번호가 다릅니다.");
       } else if (signUp.password == value) {
         setConfirmMsg("확인 되었습니다 :)");
-        setCheckId(false);
+        setConfirmPass(value);
       }
     }
     setSignUp({ ...signUp, [name]: value });
@@ -112,21 +111,22 @@ const SignUp = () => {
   const onLoadImg = (event) => {
     //현재 이미지 파일
     const imaData = event.target.files[0];
+    setImgFile(imaData);
     //선택한 이미지 파일의 url
     const imageUrl = URL.createObjectURL(imaData);
-    setImgFile(imageUrl);
+    setPreImgFile(imageUrl);
   };
+  const navigation = useNavigate();
   //등록하기
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
     const formdata = new FormData();
     formdata.append("email", emailData);
     formdata.append("channel", channelData);
     formdata.append("password", passData);
     formdata.append("confirmPassword", confirmPass);
-    formdata.append("file", imgFile); //이미지
-    dispatch(addUser(formdata));
+    formdata.append("img", imgFile); //이미지
+    dispatch(addUser(formdata, navigation));
   };
 
   return (
@@ -156,10 +156,10 @@ const SignUp = () => {
       <div className={styles.inputWarp}>
         <div className={styles.title}>프로필</div>
         <div className={styles.profile}>
-          {!imgFile[0] ? (
+          {!preImgFile[0] ? (
             <img src={base_img} alt="이미지 미리보기" />
           ) : (
-            <img src={imgFile} alt="이미지 미리보기" />
+            <img src={preImgFile} alt="이미지 미리보기" />
           )}
           <label htmlFor="userimg">사진 업로드</label>
         </div>

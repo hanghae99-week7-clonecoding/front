@@ -5,7 +5,7 @@
   height: 200vh;
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
-  margin: 1.5rem 0 0 0;
+  margin: 3rem 0 0 0;
 }
 /* 상세보기 영상소개 */
 .contentLeft {
@@ -21,7 +21,7 @@
 }
 
 .title h2 {
-  line-height: 2.6rem;
+  line-height: 4.6rem;
   font-weight: 700;
   font-size: 1.5rem;
 }
@@ -94,7 +94,7 @@
 .rightList:not(:first-of-type) {
   margin: 1rem 0 0 0;
 }
-.rightList iframe {
+.rightList righVideo {
   width: 50%;
 }
 .rightList .rightText {
@@ -108,8 +108,8 @@
 }
 .rightList .rightText div:nth-child(2) {
   color: rgb(161, 160, 160);
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 400;
   margin: 1rem 0 0 0;
 }
 

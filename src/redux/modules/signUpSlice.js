@@ -12,6 +12,10 @@ export const addUser = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const responseData = await instance.post("user/signup", payload);
+      if (responseData.data.result) {
+        alert("회원이 되신걸 축하드립니다!");
+        payload.navigation("/login");
+      }
       return responseData.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -21,12 +25,10 @@ export const addUser = createAsyncThunk(
 export const checkDoubleId = createAsyncThunk(
   "signUpSlice/checkDoubleId",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const responseData = await instance.post("user/check_Id", {
         email: payload.email,
       });
-      console.log(responseData.data.result);
       if (responseData.data.result) {
         payload.setIdMsg("사용가능한 아이디 입니다.");
       }
@@ -60,11 +62,9 @@ export const signUpSlice = createSlice({
     },
     [checkDoubleId.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
     },
     [checkDoubleId.rejected]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
     },
   },
 });

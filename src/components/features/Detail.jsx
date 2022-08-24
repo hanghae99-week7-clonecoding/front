@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../css_modules/Detail.module.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getDetailData } from "../../redux/modules/detailSlice";
+
 //fontAwsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
@@ -7,36 +11,50 @@ import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-//btn
+//동영상
+import ReactPlayer from "react-player/lazy";
+
+//element commpo
 import Btn from "../elements/Btn";
+import ProfileImg from "../elements/ProfileImg";
+
 //DetailRight
 import DetailRight from "./DetailRight";
-import { useNavigate, useParams } from "react-router-dom";
-//김도우 작업합니다
 
-const Detail = ({ children, token }) => {
+const Detail = ({ children, token, userInfo }) => {
+  console.log(token, userInfo);
+  //Hook
   const { id } = useParams();
-  console.log(id);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate;
+  const { isLoading, result } = useSelector((state) => state.detail);
+
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(getDetailData(id));
+    }
+  }, []);
+
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
         <div className={styles.payler}>
-          <iframe
-            width="787"
-            height="443"
-            src="https://www.youtube.com/embed/JxS5E-kZc2s?rel=0&amp;autoplay=1&mute=1&amp;loop=1;playlist=JxS5E-kZc2s"
-            title="Funny Cats Compilation (Most Popular) Part 1"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          <ReactPlayer
+            url={result.url}
+            playing={true}
+            muted={true}
+            controls={true}
+            light={false}
+            poster={result.url}
+            width="100%"
+            height="443px"
+          >
+            동영상영역
+          </ReactPlayer>
         </div>
         <div className={styles.title}>
-          <h2>
-            Funniest Cats 😹 - Don't try to hold back Laughter 😂 - Funny Cats
-            Life
-          </h2>
+          <h2>{result.title}</h2>
           <div className={styles.titleInfo}>
             <span>조회수 63,037,206회 . 2020. 10. 29.</span>
             <span>
@@ -59,13 +77,16 @@ const Detail = ({ children, token }) => {
               <Btn>
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
-              {!token ? (
+
+              {token !== undefined && userInfo === result.channel ? (
                 <div>
                   <Btn
                     onClick={(e) => {
-                      // console.log(e.target.id)
-                      navigate("/addform", { state: { add: "edit" } });
+                      navigate("/addform", {
+                        state: { add: "edit", data: result },
+                      });
                     }}
+                    backgroundColor="red"
                   >
                     수정
                   </Btn>
@@ -77,18 +98,12 @@ const Detail = ({ children, token }) => {
         </div>
         <div className={styles.userInfo}>
           <div className={styles.imgArea}>
-            <div></div>
+            <ProfileImg height="45%" backgroundImgUrl={result.userimage} />
           </div>
-          {/* <img src="../../res/img/cat.jpeg" alt="프로필 이미지" /> */}
           <div className={styles.user}>
-            <div className={styles.userName}>Aww Animals</div>
+            <div className={styles.userName}>{result.channel}</div>
             <div className={styles.userSubScriptNum}>구독자 354만명</div>
-            <p>
-              Watching funny baby cats is the hardest try not to laugh
-              challenge. Baby cats are amazing pets because they are the cutest
-              and most funny. This is the cutest and best video ever. It is
-              funny and cute!
-            </p>
+            <p>{result.discription}</p>
             <span>자세히</span>
           </div>
           <Btn backgroundColor="red" color="#fff">

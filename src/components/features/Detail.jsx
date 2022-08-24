@@ -10,7 +10,6 @@ import {
   goodDetail,
 } from "../../redux/modules/detailSlice";
 
-
 //컴포넌트
 import Comment from "./Comment";
 import DetailRight from "./DetailRight";
@@ -46,11 +45,6 @@ const Detail = ({ token, userInfo, userImg }) => {
     }
   }, []);
 
-  const onClickGoodHandler = () => {
-    dispatch(goodDetail(id));
-  };
-
-
   const moveAddForm = () => {
     navigate("/addform", { state: { add: "edit", data: result, postId: id } });
   };
@@ -66,7 +60,6 @@ const Detail = ({ token, userInfo, userImg }) => {
   const onClickGoodHandler = () => {
     dispatch(goodDetail(id));
   };
-
 
   return (
     <div className={styles.detailWrap}>
@@ -113,10 +106,8 @@ const Detail = ({ token, userInfo, userImg }) => {
 
               {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
-
                   <Btn onClick={moveAddForm}>수정</Btn>
                   <Btn onClick={deleteForm}>삭제</Btn>
-
                 </span>
               ) : null}
             </span>

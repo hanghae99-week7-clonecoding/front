@@ -10,7 +10,7 @@ const store = configureStore({
   reducer: {
     sign: signUpSlice,
     comment: commentSlice,
-    // detail: detailSlice,
+    detail: detailSlice,
     // addForm: addFormSlice,
     main: mainSlice,
     // login: loginSlice,

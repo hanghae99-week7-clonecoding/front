@@ -6,9 +6,11 @@ import { useCookies } from "react-cookie";
 
 const DetailPage = () => {
   const [cookies] = useCookies(["jwtToken"]);
+  const userChannel = window.localStorage.getItem("userChannel");
+
   return (
     <Layout>
-      <Detail token={cookies.jwtToken}>
+      <Detail userInfo={userChannel} token={cookies.jwtToken}>
         <Comment token={cookies.jwtToken} />
       </Detail>
     </Layout>

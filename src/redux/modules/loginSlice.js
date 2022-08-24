@@ -11,11 +11,15 @@ const initialState = {
 export const __postLogin = createAsyncThunk(
   "users/postLogin",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const data = await instance.post(`/user/login`, payload.login);
       const token = data.data.token;
       setCookie("jwtToken", `${token}`);
+      //로컬스토리지에 채널명 저장
+      window.localStorage.setItem(
+        "userChannel",
+        JSON.stringify(data.data.channel)
+      );
       if (data.data.result) {
         alert("로그인 성공합니다");
         payload.navigation("/");

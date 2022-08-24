@@ -6,14 +6,12 @@ import styles from "../css_modules/Comment.module.css";
 //btn
 import Btn from "../elements/Btn";
 
-const Comment = ({ token }) => {
+const Comment = ({ token, posiId, userInfo }) => {
   //Hook
   const inputVal = useRef();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.comment.result);
-
-  const commentList = useSelector((state) => state.comment.comment)
-  console.log(data)
+  const commentList = useSelector((state) => state.comment.comment);
 
   //State
   const [checkBtn, setCheckBtn] = useState(false); //취소,등록버튼 보여주게 처리
@@ -40,15 +38,13 @@ const Comment = ({ token }) => {
   };
   //댓글등록하기
   const addComment = () => {
-    dispatch(sendComment({ postId: 6, comment: inputVal.current.value }));
+    dispatch(sendComment({ postId: posiId, comment: inputVal.current.value }));
   };
   // console.log(addComment)
 
   useEffect(() => {
-    dispatch(getComment( {postId: 6}))
-  }, [])
-
-
+    dispatch(getComment({ postId: 6 }));
+  }, []);
 
   //리턴
   return (
@@ -70,16 +66,18 @@ const Comment = ({ token }) => {
           </div>
         </div>
         <div>
-          {commentList ? commentList.map((list)=> {
-          return (
-            <div key={list.id}>
-              <div>{list.id}</div>
-              <div>{list.content}</div>
-            </div>
-          )
-        }) : null}
+          {commentList
+            ? commentList.map((list) => {
+                return (
+                  <div key={list.id}>
+                    <div>{list.id}</div>
+                    <div>{list.content}</div>
+                  </div>
+                );
+              })
+            : null}
         </div>
-        
+
         {checkBtn ? showBtn() : null}
       </div>
       <div className={styles.listContent}>

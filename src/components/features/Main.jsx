@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getMovie, __getCategory } from "../../redux/modules/mainSlice";
 import ReactPlayer from "react-player/lazy";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+  const navigate = useNavigate();
   const [ref, inview] = useInView(); //보이면 true,안보이면 faluse
   const [page, setPage] = useState(1); //페이지수
   const { lists, isLoading } = useSelector((state) => state.main);
-  const [category, Setcategory] = useState({
-    category: "",
-  });
   const dispatch = useDispatch();
   console.log(lists);
   useEffect(() => {
@@ -23,8 +22,12 @@ const Main = () => {
       setPage((prevState) => prevState + 1);
     }
   }, [inview]);
+  const onClickmainHandler = () => {};
   const onClickHandler = (event) => {
     const { id } = event.target;
+    if (id === "전체") {
+      return;
+    }
     dispatch(__getCategory(id));
   };
 
@@ -32,15 +35,8 @@ const Main = () => {
   console.log(page);
   return (
     <div className={styles.CategoryBox}>
-      <div className={styles.NavBox}>
-        <div>홈</div>
-        <div>탐색</div>
-        <div>Shorts</div>
-        <div>구독</div>
-        <div>보관함</div>
-      </div>
       <div className={styles.Category}>
-        <button onClick={onClickHandler} id="전체">
+        <button onClick={onClickmainHandler} id="전체">
           전체
         </button>
         <button onClick={onClickHandler} id="음악">
@@ -65,7 +61,12 @@ const Main = () => {
       <div className={styles.VideoBox}>
         {lists.map((list, idx) => {
           return (
-            <div key={idx}>
+            <div
+              onClick={() => {
+                navigate(`/detail/${list.postId}`);
+              }}
+              key={idx}
+            >
               {lists.length - 1 == idx ? (
                 <div ref={ref} className={styles.Video}>
                   <ReactPlayer
@@ -76,7 +77,7 @@ const Main = () => {
                     light={false}
                     poster={list.url}
                     width="400px"
-                    height="210px"
+                    height="220px"
                   >
                     동영상영역
                   </ReactPlayer>
@@ -87,12 +88,16 @@ const Main = () => {
                     }}
                   >
                     <div>
-                      <div className={styles.userImg}></div>
+                      <img
+                        className={styles.userImg}
+                        src={list.userimage}
+                        alt="유저사진"
+                      ></img>
                     </div>
-                    <div>
-                      <p className={styles.PstyleTitle}>타이틀</p>
-                      <p className={styles.Pstyle}>유저</p>
-                      <p className={styles.Pstyle}>날짜</p>
+                    <div className={styles.pBox}>
+                      <p className={styles.PstyleTitle}>{list.title}</p>
+                      <p className={styles.Pstyle}>{list.channel}</p>
+                      <p className={styles.Pstyle}>{list.updatedAt}</p>
                     </div>
                   </div>
                 </div>
@@ -103,27 +108,27 @@ const Main = () => {
                     playing={false}
                     muted={true}
                     width="400px"
-                    height="210px"
+                    height="220px"
                   ></ReactPlayer>
                   <div
                     style={{
                       display: "flex",
-                      marginTop: "5px",
+                      marginTop: "10px",
                     }}
                   >
                     <div>
                       <div>
                         <img
                           className={styles.userImg}
-                          src={list.userimg}
+                          src={list.userimage}
                           alt="유저사진"
                         ></img>
                       </div>
                     </div>
-                    <div>
-                      <p className={styles.PstyleTitle}>타이틀</p>
-                      <p className={styles.Pstyle}>유저</p>
-                      <p className={styles.Pstyle}>날짜</p>
+                    <div className={styles.pBox}>
+                      <p className={styles.PstyleTitle}>{list.title}</p>
+                      <p className={styles.Pstyle}>{list.channel}</p>
+                      <p className={styles.Pstyle}>{list.updatedAt}</p>
                     </div>
                   </div>
                 </div>

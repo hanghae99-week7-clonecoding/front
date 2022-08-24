@@ -17,6 +17,44 @@ export const getDetailData = createAsyncThunk(
   }
 );
 
+export const goodDetail = createAsyncThunk(
+  "detailSlice/goodDetail",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const responseData = await instance.post(`like/${payload}`);
+      payload.useEffect(() => {}, []);
+      return responseData.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getSubscribe = createAsyncThunk(
+  "dd/getDd",
+  async (payload, thunkAPI) => {
+    try {
+      const responseData = await instance.put(`post/${payload}/:like`);
+      return responseData.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// 글 삭제
+export const getDeleteForm = createAsyncThunk(
+  "deleteData/getdeleteData",
+  async (payload, thunkAPI) => {
+    try {
+      const responseData = await instance.delete(`post/${payload}`);
+      return responseData.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const detailSlice = createSlice({
   name: "detailSlice",
   initialState,
@@ -31,6 +69,22 @@ export const detailSlice = createSlice({
     },
     [getDetailData.rejected]: (state) => {
       state.isLoading = false;
+    },
+    [goodDetail.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [goodDetail.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.isLoading = false;
+    },
+    [goodDetail.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [getDeleteForm.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getDeleteForm.fulfilled]: (state, action) => {
+      state.result = action.payload;
     },
   },
 });

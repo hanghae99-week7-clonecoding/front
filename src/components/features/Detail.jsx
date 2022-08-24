@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Detail.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailData } from "../../redux/modules/detailSlice";
+import {
+  getDetailData,
+  getDeleteForm,
+  getSubscribe,
+  goodDetail,
+} from "../../redux/modules/detailSlice";
+
 //컴포넌트
 import Comment from "./Comment";
 import DetailRight from "./DetailRight";
@@ -20,26 +26,39 @@ import ReactPlayer from "react-player/lazy";
 //element commpo
 import Btn from "../elements/Btn";
 import ProfileImg from "../elements/ProfileImg";
+import baseImg from "../../res/img/base_profile.jpeg";
 
-const Detail = ({ token, userInfo }) => {
+const Detail = ({ token, userInfo, userImg }) => {
   //Hook
   const { id } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, result } = useSelector((state) => state.detail);
+  //state
+  const [subs, setSubs] = useState(false);
 
   useEffect(() => {
     if (!isLoading) {
       dispatch(getDetailData(id));
     }
   }, []);
-  console.log(id)
-  
+
   const moveAddForm = () => {
-    navigate("/addform", 
-    {state: { add: "edit", data: result, postId: id }});
-  }
+    navigate("/addform", { state: { add: "edit", data: result, postId: id } });
+  };
+  const deleteForm = (event) => {
+    dispatch(getDeleteForm(id));
+    navigate("/");
+  };
+  const clickSubs = (event) => {
+    setSubs(!subs);
+    dispatch(getSubscribe(id));
+  };
+  const onClickGoodHandler = () => {
+    dispatch(goodDetail(id));
+  };
+
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -62,9 +81,10 @@ const Detail = ({ token, userInfo }) => {
           <div className={styles.titleInfo}>
             <span>조회수 63,037,206회 . 2020. 10. 29.</span>
             <span>
-              <Btn>
+              <Btn style={{ display: "flex" }} onClick={onClickGoodHandler}>
                 <FontAwesomeIcon icon={faThumbsUp} />
                 좋아요
+                {result.like}
               </Btn>
               <Btn>
                 <FontAwesomeIcon icon={faThumbsDown} />
@@ -84,13 +104,8 @@ const Detail = ({ token, userInfo }) => {
 
               {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
-                  <Btn
-                    onClick={moveAddForm}
-                    backgroundColor="blue"
-                  >
-                    수정
-                  </Btn>
-                  <Btn color="red">삭제</Btn>
+                  <Btn onClick={moveAddForm}>수정</Btn>
+                  <Btn onClick={deleteForm}>삭제</Btn>
                 </span>
               ) : null}
             </span>
@@ -98,7 +113,11 @@ const Detail = ({ token, userInfo }) => {
         </div>
         <div className={styles.userInfo}>
           <div className={styles.imgArea}>
-            <ProfileImg height="45%" backgroundImgUrl={result.userimage} />
+            {token !== undefined && userInfo === result.channel ? (
+              <ProfileImg height="45%" backgroundImgUrl={result.userimage} />
+            ) : (
+              <ProfileImg height="45%" backgroundImgUrl={baseImg} />
+            )}
           </div>
           <div className={styles.user}>
             <div className={styles.userName}>{result.channel}</div>
@@ -106,12 +125,34 @@ const Detail = ({ token, userInfo }) => {
             <p>{result.discription}</p>
             <span>자세히</span>
           </div>
-          <Btn backgroundColor="red" color="#fff">
-            구독
-          </Btn>
+
+          {result.subscribe === "구독자" ? (
+            <Btn
+              backgroundColor="red"
+              color="#fff"
+              onClick={clickSubs}
+              value="구독중"
+            >
+              구독중
+            </Btn>
+          ) : (
+            <Btn
+              backgroundColor="red"
+              color="#fff"
+              onClick={clickSubs}
+              value="구독"
+            >
+              구독
+            </Btn>
+          )}
         </div>
         <div className="commentsArea">
-          <Comment token={token} posiId={id} userInfo={userInfo} />
+          <Comment
+            token={token}
+            postId={id}
+            userInfo={userInfo}
+            userImg={userImg}
+          />
         </div>
       </div>
       <div className={styles.contentRight}>

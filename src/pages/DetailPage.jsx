@@ -2,15 +2,14 @@ import React from "react";
 import Layout from "../components/common/Layout";
 import Detail from "../components/features/Detail";
 import Comment from "../components/features/Comment";
-import { useCookies } from "react-cookie";
+import { getCookie } from "../res/cookie";
 
 const DetailPage = () => {
-  const [cookies] = useCookies(["jwtToken"]);
-  const userChannel = window.localStorage.getItem("userChannel");
-
+  const token = getCookie("jwtToken");
+  const userImg = getCookie("userChannel");
   return (
     <Layout>
-      <Detail userInfo={userChannel} token={cookies.jwtToken} />
+      <Detail userInfo={userImg} token={token} />
     </Layout>
   );
 };

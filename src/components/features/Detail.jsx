@@ -26,7 +26,7 @@ const Detail = ({ token, userInfo }) => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const { isLoading, result } = useSelector((state) => state.detail);
 
   useEffect(() => {
@@ -34,7 +34,12 @@ const Detail = ({ token, userInfo }) => {
       dispatch(getDetailData(id));
     }
   }, []);
-
+  console.log(id)
+  
+  const moveAddForm = () => {
+    navigate("/addform", 
+    {state: { add: "edit", data: result, postId: id }});
+  }
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -77,15 +82,10 @@ const Detail = ({ token, userInfo }) => {
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
 
-              {token !== undefined &&
-              JSON.parse(userInfo) === result.channel ? (
+              {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
                   <Btn
-                    onClick={(e) => {
-                      navigate("/addform", {
-                        state: { add: "edit", data: result },
-                      });
-                    }}
+                    onClick={moveAddForm}
                     backgroundColor="blue"
                   >
                     수정

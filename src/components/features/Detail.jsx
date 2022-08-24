@@ -36,7 +36,6 @@ const Detail = ({ children, token, userInfo }) => {
     }
   }, []);
 
-
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -80,15 +79,13 @@ const Detail = ({ children, token, userInfo }) => {
               </Btn>
 
               {token !== undefined && userInfo === result.channel ? (
-
                 <div>
-              <Btn
+                  <Btn
                     onClick={(e) => {
-
                       navigate("/addform", {
                         state: { add: "edit", data: result },
                       });
-
+                    }}
                     backgroundColor="red"
                   >
                     수정

@@ -37,6 +37,10 @@ export const LoginSlice = createSlice({
     [__postLogin.fulfilled]: (state, action) => {
       console.log(action.payload);
     },
+    [__postLogin.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+    },
   },
 });
 

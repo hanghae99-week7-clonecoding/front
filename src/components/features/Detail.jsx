@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../css_modules/Detail.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailData, getSubscribe, getDeleteForm } from "../../redux/modules/detailSlice";
+import { getDetailData } from "../../redux/modules/detailSlice";
 //컴포넌트
 import Comment from "./Comment";
 import DetailRight from "./DetailRight";
@@ -24,39 +24,22 @@ import ProfileImg from "../elements/ProfileImg";
 const Detail = ({ token, userInfo }) => {
   //Hook
   const { id } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, result } = useSelector((state) => state.detail);
-  console.log(result)
-
-  // 구독 구현중 
-  const [subs, setSubs] = useState(false);
 
   useEffect(() => {
     if (!isLoading) {
       dispatch(getDetailData(id));
     }
   }, []);
-  // console.log(id)
-
-  // 글 수정
+  console.log(id)
+  
   const moveAddForm = () => {
-    navigate("/addform",
-      { state: { add: "edit", data: result, postId: id } });
+    navigate("/addform", 
+    {state: { add: "edit", data: result, postId: id }});
   }
-
-  // 글 삭제 
-  const deleteForm = (event) => {
-    dispatch(getDeleteForm(id))
-    navigate("/")
-  }
-
-  // 구독 기능 구현중
-  const clickSubs = (event) => {
-    setSubs(!subs)
-    dispatch(getSubscribe(id))
-  }
-
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -98,14 +81,16 @@ const Detail = ({ token, userInfo }) => {
               <Btn>
                 <FontAwesomeIcon icon={faEllipsis} />
               </Btn>
+
               {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
                   <Btn
                     onClick={moveAddForm}
+                    backgroundColor="blue"
                   >
                     수정
                   </Btn>
-                  <Btn onClick={deleteForm}>삭제</Btn>
+                  <Btn color="red">삭제</Btn>
                 </span>
               ) : null}
             </span>
@@ -121,21 +106,9 @@ const Detail = ({ token, userInfo }) => {
             <p>{result.discription}</p>
             <span>자세히</span>
           </div>
-          {/* {!subs ? 
-          <Btn backgroundColor="red" color="#fff" onClick={clickSubs}>
+          <Btn backgroundColor="red" color="#fff">
             구독
-          </Btn> : 
-          <Btn backgroundColor="red" color="#fff" onClick={clickSubs}>
-            구독중
-          </Btn>} */}
-          {result.subscribe === '구독자' ? 
-          <Btn backgroundColor="red" color="#fff" onClick={clickSubs} value='구독중'>
-            구독중
-          </Btn> :
-            <Btn backgroundColor="red" color="#fff" onClick={clickSubs} value='구독'>
-              구독
-            </Btn>
-          }
+          </Btn>
         </div>
         <div className="commentsArea">
           <Comment token={token} posiId={id} userInfo={userInfo} />

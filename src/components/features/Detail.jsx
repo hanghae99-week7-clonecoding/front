@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from "../css_modules/Detail.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailData } from "../../redux/modules/detailSlice";
+import { getDetailData, goodDetail } from "../../redux/modules/detailSlice";
 //컴포넌트
 import Comment from "./Comment";
 import DetailRight from "./DetailRight";
@@ -34,12 +34,15 @@ const Detail = ({ token, userInfo }) => {
       dispatch(getDetailData(id));
     }
   }, []);
-  console.log(id)
-  
+  const onClickGoodHandler = () => {
+    dispatch(goodDetail(id));
+  };
+  console.log(id);
+  console.log(result);
+
   const moveAddForm = () => {
-    navigate("/addform", 
-    {state: { add: "edit", data: result, postId: id }});
-  }
+    navigate("/addform", { state: { add: "edit", data: result, postId: id } });
+  };
   return (
     <div className={styles.detailWrap}>
       <div className={styles.contentLeft}>
@@ -62,10 +65,11 @@ const Detail = ({ token, userInfo }) => {
           <div className={styles.titleInfo}>
             <span>조회수 63,037,206회 . 2020. 10. 29.</span>
             <span>
-              <Btn>
+              <Btn style={{ display: "flex" }} onClick={onClickGoodHandler}>
                 <FontAwesomeIcon icon={faThumbsUp} />
-                좋아요
+                {result.like}
               </Btn>
+
               <Btn>
                 <FontAwesomeIcon icon={faThumbsDown} />
                 싫어요
@@ -84,10 +88,7 @@ const Detail = ({ token, userInfo }) => {
 
               {token !== undefined && userInfo === result.channel ? (
                 <span className={styles.btnWrap}>
-                  <Btn
-                    onClick={moveAddForm}
-                    backgroundColor="blue"
-                  >
+                  <Btn onClick={moveAddForm} backgroundColor="blue">
                     수정
                   </Btn>
                   <Btn color="red">삭제</Btn>

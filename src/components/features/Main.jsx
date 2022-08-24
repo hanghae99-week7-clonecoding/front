@@ -14,7 +14,6 @@ const Main = () => {
   const { lists, isLoading } = useSelector((state) => state.main);
 
   const dispatch = useDispatch();
-  console.log(lists);
   useEffect(() => {
     dispatch(__getMovie(page));
   }, [page]);
@@ -23,7 +22,7 @@ const Main = () => {
       setPage((prevState) => prevState + 1);
     }
   }, [inview]);
-  const onClickmainHandler = () => {};
+
   const onClickHandler = (event) => {
     const { id } = event.target;
     if (id === "전체") {
@@ -33,8 +32,6 @@ const Main = () => {
     dispatch(__getCategory(id));
   };
 
-  console.log(inview);
-  console.log(page);
   return (
     <div className={styles.CategoryBox}>
       <div className={styles.Category}>

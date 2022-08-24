@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "../css_modules/Header.module.css";
-import styled from "styled-components";
 import Nav from "./Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
+import { __getTitle } from "../../redux/modules/mainSlice";
 import { getCookie, removeCookie } from "../../res/cookie";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [menu, Setmenu] = useState(false);
   const [visible, Setvisible] = useState(false);
@@ -17,7 +19,7 @@ const Header = () => {
   const userImg = getCookie("userImg");
   const [loginState, setLoginState] = useState(false);
   const [search, Setsearch] = useState({
-    search: "",
+    keyword: "",
   });
 
   const logoutHandler = () => {
@@ -28,9 +30,14 @@ const Header = () => {
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     Setsearch({ ...search, [name]: value });
-    console.log(search);
   };
-  const onSearchHandler = () => {};
+  const onSearchHandler = (event) => {
+    event.preventDefault();
+    dispatch(__getTitle(search.keyword));
+    Setsearch({
+      keyword: "",
+    });
+  };
   useEffect(() => {
     token ? setLoginState(true) : setLoginState(false);
   }, [token]);
@@ -58,18 +65,15 @@ const Header = () => {
             ></img>
           </div>
         </div>
-        <form className={styles.HeaderForm}>
+        <form onSubmit={onSearchHandler} className={styles.HeaderForm}>
           <input
-            name="search"
+            name="keyword"
             onChange={onChangeHandler}
             placeholder="검색"
             className={styles.HeaderInput}
+            value={search.keyword}
           ></input>
-          <button
-            onClick={() => {
-              onSearchHandler();
-            }}
-          >
+          <button>
             <FontAwesomeIcon
               style={{ height: "15px" }}
               icon={faMagnifyingGlass}

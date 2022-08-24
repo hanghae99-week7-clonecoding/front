@@ -78,6 +78,9 @@
   text-align: center;
   border-radius: 5px;
 }
+.btnWrap {
+  display: flex;
+}
 /* ---상세보기 유저 채널명 및 해당 게시글 소개  env----- */
 
 /* 상세보기 우측 플레이 리스트 - DetailRight.jsx 에서 같은 css  */

@@ -10,9 +10,7 @@ const DetailPage = () => {
 
   return (
     <Layout>
-      <Detail userInfo={userChannel} token={cookies.jwtToken}>
-        <Comment token={cookies.jwtToken} />
-      </Detail>
+      <Detail userInfo={userChannel} token={cookies.jwtToken} />
     </Layout>
   );
 };

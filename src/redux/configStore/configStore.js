@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import signUpSlice from "../modules/signUpSlice";
 import commentSlice from "../modules/commentSlice";
+import commentListSlice from "../modules/commentListSlice";
 import detailSlice from "../modules/detailSlice";
 import addFormSlice from "../modules/addFormSlice";
 import mainSlice from "../modules/mainSlice";
@@ -11,6 +12,7 @@ const store = configureStore({
     sign: signUpSlice,
     comment: commentSlice,
     detail: detailSlice,
+    commentList: commentListSlice,
     // addForm: addFormSlice,
     main: mainSlice,
     // login: loginSlice,

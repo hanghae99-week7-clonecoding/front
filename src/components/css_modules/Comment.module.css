@@ -40,3 +40,7 @@
   display: flex;
   justify-content: end;
 }
+/* list css */
+.listWrap {
+  width: 100%;
+}

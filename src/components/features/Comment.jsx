@@ -1,17 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { sendComment, getComment } from "../../redux/modules/commentSlice";
-
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { sendComment } from "../../redux/modules/commentSlice";
 import styles from "../css_modules/Comment.module.css";
-//btn
+//element
 import Btn from "../elements/Btn";
+import ProfileImg from "../elements/ProfileImg";
+import baseImg from "../../res/img/base_profile.jpeg";
+//컴포넌트
+import CommentList from "./CommentList";
 
 const Comment = ({ token, posiId, userInfo }) => {
   //Hook
   const inputVal = useRef();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.comment.result);
-  const commentList = useSelector((state) => state.comment.comment);
 
   //State
   const [checkBtn, setCheckBtn] = useState(false); //취소,등록버튼 보여주게 처리
@@ -40,11 +41,6 @@ const Comment = ({ token, posiId, userInfo }) => {
   const addComment = () => {
     dispatch(sendComment({ postId: posiId, comment: inputVal.current.value }));
   };
-  // console.log(addComment)
-
-  useEffect(() => {
-    dispatch(getComment({ postId: 6 }));
-  }, []);
 
   //리턴
   return (
@@ -52,8 +48,12 @@ const Comment = ({ token, posiId, userInfo }) => {
       <div className={styles.writeContent}>
         <div className={styles.commentWrite}>
           <div className={styles.profile}>
-            {/* 이미지는 해당영역의 백그라운드로 들어갈 예정 */}
-            <div></div>
+            {token !== undefined ? (
+              //도우님꺼 Merge 받으면 프롭스값 넣기
+              <ProfileImg height="45%" backgroundImgUrl={baseImg} />
+            ) : (
+              <ProfileImg height="45%" backgroundImgUrl={baseImg} />
+            )}
           </div>
           <div className={styles.comment}>
             <input
@@ -65,23 +65,11 @@ const Comment = ({ token, posiId, userInfo }) => {
             />
           </div>
         </div>
-        <div>
-          {commentList
-            ? commentList.map((list) => {
-                return (
-                  <div key={list.id}>
-                    <div>{list.id}</div>
-                    <div>{list.content}</div>
-                  </div>
-                );
-              })
-            : null}
-        </div>
-
         {checkBtn ? showBtn() : null}
       </div>
+
       <div className={styles.listContent}>
-        {data ? <button>으아</button> : <button>수정</button>}
+        <CommentList token={token} userInfo={userInfo} id={posiId} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../res/instance";
-// import axios from "axios";
 
+//등록하기 초기화
 const initialState = {
   result: "",
   comment: "",
@@ -10,28 +10,11 @@ const initialState = {
 export const sendComment = createAsyncThunk(
   "commentSlice/sendComment",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
-      const responseData = await instance.post(
-        `comment/${payload.postId}`,
-        payload.comment
-      );
-      console.log(responseData.data);
+      const responseData = await instance.post(`comment/${payload.postId}`, {
+        comment: payload.comment,
+      });
       return responseData.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const getComment = createAsyncThunk(
-  "commentSlice/getComment",
-  async (payload, thunkAPI) => {
-    try {
-      const responseData = await instance.get(`comment/${payload.postId}`);
-      console.log(responseData.data)
-      return responseData.data;
-      
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -47,20 +30,10 @@ export const commentSlice = createSlice({
       state.isLoading = true;
     },
     [sendComment.fulfilled]: (state, action) => {
-      state.result = action.payload;
+      state.send.result = action.payload;
       state.isLoading = false;
     },
     [sendComment.rejected]: (state) => {
-      state.isLoading = false;
-    },
-    [getComment.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [getComment.fulfilled]: (state, action) => {
-      state.result = action.payload;
-      state.isLoading = false;
-    },
-    [getComment.rejected]: (state) => {
       state.isLoading = false;
     },
   },

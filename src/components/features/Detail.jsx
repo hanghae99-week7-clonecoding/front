@@ -50,7 +50,7 @@ const Detail = ({ token, userInfo, userImg }) => {
     dispatch(getDeleteForm(id));
     navigate("/");
   };
-
+  
   const onClickGoodHandler = () => {
     dispatch(goodDetail(id));
   };

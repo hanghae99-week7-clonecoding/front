@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import instance from "../../res/instance";
-
 
 export const postWritesThunk = createAsyncThunk(
   "addForm/getAddForm",
@@ -18,7 +16,7 @@ export const postWritesThunk = createAsyncThunk(
 export const postEditThunk = createAsyncThunk(
   "editForm/getEditForm",
   async (payload, thunkAPI) => {
-    console.log(payload)
+    console.log(payload);
     try {
       const response = await instance.put(`post/${payload.id}`, payload.data);
       return response.data;
@@ -39,7 +37,7 @@ export const AddForm = createSlice({
         state.data.push(action.payload);
       })
       .addCase(postWritesThunk.rejected, (state, action) => {})
-      
+
       .addCase(postEditThunk.pending, (state, action) => {})
       .addCase(postEditThunk.fulfilled, (state, action) => {
         state.data.push(action.payload);

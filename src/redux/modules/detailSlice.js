@@ -33,9 +33,7 @@ export const getSubscribe = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const responseData = await instance.post(`subscribe/${payload}`);
-      console.log(responseData.data)
       return responseData.data;
-      
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

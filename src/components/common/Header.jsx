@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
 import { __getTitle } from "../../redux/modules/mainSlice";
 import { getCookie, removeCookie } from "../../res/cookie";
-import ProfileImg from "../elements/ProfileImg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -40,7 +39,7 @@ const Header = () => {
     });
   };
   useEffect(() => {
-    token ? setLoginState(true) : setLoginState(false);
+    token === undefined ? setLoginState(true) : setLoginState(false);
   }, [token]);
   return (
     <div>
@@ -90,10 +89,11 @@ const Header = () => {
               icon={faCamera}
             ></FontAwesomeIcon>
           </div>
-          {token ? (
-            <div>
-              <ProfileImg height="45%" backgroundImgUrl={userImg} />
+          {token !== undefined ? (
+            <div className={styles.profile}>
+              <img src={userImg} alt="사진" className={styles.userImg} />
               <div
+                className={styles.logIn}
                 onClick={() => {
                   logoutHandler();
                   navigate("/");
@@ -104,6 +104,7 @@ const Header = () => {
             </div>
           ) : (
             <div
+              className={styles.logIn}
               onClick={() => {
                 navigate("/login");
               }}

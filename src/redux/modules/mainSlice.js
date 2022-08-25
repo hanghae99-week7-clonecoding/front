@@ -7,6 +7,7 @@ const initialState = {
   error: null,
 };
 
+console.log(instance.defaults.headers);
 export const __getMovie = createAsyncThunk(
   "lists/getMovie",
   async (payload, thunkAPI) => {
@@ -52,7 +53,6 @@ export const mainSlice = createSlice({
       state.isLoading = true;
     },
     [__getMovie.fulfilled]: (state, action) => {
-
       state.lists = [...state.lists].concat(action.payload.pageData);
       state.isLoading = false;
     },

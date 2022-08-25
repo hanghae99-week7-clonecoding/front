@@ -4,7 +4,6 @@ import instance from "../../res/instance";
 const initialState = {
   result: [],
 };
-
 export const getDetailData = createAsyncThunk(
   "detailSlice/getDetailData",
   async (payload, thunkAPI) => {
@@ -19,7 +18,6 @@ export const getDetailData = createAsyncThunk(
 export const goodDetail = createAsyncThunk(
   "detailSlice/goodDetail",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const responseData = await instance.post(`like/${payload}`);
       payload.useEffect(() => {}, []);
@@ -75,7 +73,6 @@ export const detailSlice = createSlice({
       state.isLoading = true;
     },
     [goodDetail.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.isLoading = false;
     },
     [goodDetail.rejected]: (state) => {

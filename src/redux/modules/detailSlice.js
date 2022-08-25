@@ -29,15 +29,16 @@ export const goodDetail = createAsyncThunk(
     }
   }
 );
-
+// 구독
 export const getSubscribe = createAsyncThunk(
   "dd/getDd",
   async (payload, thunkAPI) => {
     try {
-      const responseData = await instance.put(`post/${payload}/:like`);
+      const responseData = await instance.post(`subscribe/${payload}`);
+      console.log(responseData.data)
       return responseData.data;
+      
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -84,6 +85,12 @@ export const detailSlice = createSlice({
       state.isLoading = true;
     },
     [getDeleteForm.fulfilled]: (state, action) => {
+      state.result = action.payload;
+    },
+    [getSubscribe.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getSubscribe.fulfilled]: (state, action) => {
       state.result = action.payload;
     },
   },

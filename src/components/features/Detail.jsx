@@ -53,10 +53,13 @@ const Detail = ({ token, userInfo, userImg }) => {
     dispatch(getDeleteForm(id));
     navigate("/");
   };
+
   const clickSubs = (event) => {
-    setSubs(!subs);
+    console.log(event.target.value)
+
     dispatch(getSubscribe(id));
   };
+  
   const onClickGoodHandler = () => {
     dispatch(goodDetail(id));
   };

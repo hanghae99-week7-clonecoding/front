@@ -64,6 +64,8 @@
   display: flex;
   padding: 10px;
   align-items: center;
+  width: 109px;
+  justify-content: flex-end;
 }
 .userImg {
   width: 40px;

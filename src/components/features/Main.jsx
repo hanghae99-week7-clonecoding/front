@@ -17,6 +17,7 @@ const Main = () => {
   useEffect(() => {
     dispatch(__getMovie(page));
   }, [page]);
+  const sortTodos = lists.slice().sort((a, b) => b - a);
   useEffect(() => {
     if (inview && !isLoading) {
       setPage((prevState) => prevState + 1);
@@ -58,7 +59,7 @@ const Main = () => {
         </button>
       </div>
       <div className={styles.VideoBox}>
-        {lists.map((list, idx) => {
+        {sortTodos.map((list, idx) => {
           return (
             <div
               className={styles.videoWrap}
@@ -67,7 +68,7 @@ const Main = () => {
               }}
               key={idx}
             >
-              {lists.length - 1 == idx ? (
+              {sortTodos.length - 1 == idx ? (
                 <div ref={ref} className={styles.Video}>
                   <ReactPlayer
                     url={list.url}

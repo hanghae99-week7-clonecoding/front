@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+## 1. 시연영상
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+**[http://faketube-clone.s3-website.ap-northeast-2.amazonaws.com/](http://faketube-clone.s3-website.ap-northeast-2.amazonaws.com/)**
 
-In the project directory, you can run:
+[https://www.youtube.com/watch?v=gpe1IZ0HHr8](https://www.youtube.com/watch?v=gpe1IZ0HHr8)
 
-### `yarn start`
+## 2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Front-end (React)
+    - 김도우
+    - 강나오미
+    - 임주영
+- Back-end (Node.js)
+    - 김승남
+    - 김승민
+    - 신현호
 
-### `yarn test`
+## 3. 사용 기술 🔧 ⚙️
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+- View : **`React with JavaScript`, `React-Router`, `material-UI`, `Styled-components`**
+- State Management : **`Redux`, `Redux-Thunk`, `Immer`, `Redux-actions`**
+- Build Tool : **`Create React App`**
+- Infrastructure **`AWS S3`, `Route 53`**
+- Other Tools : **`Git`, `Github`, `notion`**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 4. 구현 기능 📃
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 로그인(JWT Token 인증) & 회원가입 🔓
+- 게시글 CR(UD)
+- 댓글 CR(UD)
 
-### `yarn eject`
+## 5. 컴포넌트구조 📃
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Pages
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. App.js
+2. 로그인(SignIn) - Modal(이메일, 패스워드)
+3. 회원가입(SignUp) - Modal(이메일, 채널명, 패스워드, 패스워드 확인)
+4. 메인페이지(Main)
+5. 게시물 상세페이지(Detail)
+6. 게시물 등록/수정페이지(AddForm)
+7. 댓글 등록/수정/삭제 (DetailPage>Comment)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
++) 개인 정보 수정
 
-## Learn More
+*게시글 수정 화면은 어떻게 하지..?>>로그인 여부 확인해서 같은 컴포넌트 안에서 처리하기로함
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Component 파일 구조
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **components**
+    1. **common**
+        - Header
+        - Layout
+    2. **css_modules**
+        - AddForom (등록)
+        - Comments (댓글)
+        - Detail (상세보기)
+        - Login
+        - Main
+        - SignUp
+    3. **elements**
+        - Button
+    4. **features**
+        - AddForom (등록)
+        - Comments (댓글)
+        - Detail (상세보기)
+        - DetailRight(상세보기-오른쪽 :무한스크롤 페이지)
+        - Login
+        - Main
+        - SignUp
+- **pages**
+    - DetailPage
+    - LoginPage
+    - MainPage
+    - SignUp
+    - AddForm
+- **res**
+    - font
+        - font.css
+    - img
+        - yt_logo(유튜브 로고)
+        - base_img(기본프로필 로고)
+    - instance (axios 환경 통일)
+    - search ( 검색기능 환경 통일) > 아직 미생성(0822기준)
+    - statusCode (서버 반환 메세지 통일) > 아직 미생성 (0822기준)
+- **redux**
+    1. configureStore
+        - store
+    2. modules
+        - login
+        - addForm
+        - detail
+        - main
+        - signUp
+- **shared**
+    - Router

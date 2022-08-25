@@ -36,8 +36,6 @@ const Detail = ({ token, userInfo, userImg }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, result } = useSelector((state) => state.detail);
-  //state
-  const [subs, setSubs] = useState(false);
 
   useEffect(() => {
     if (!isLoading) {
@@ -52,12 +50,6 @@ const Detail = ({ token, userInfo, userImg }) => {
   const deleteForm = (event) => {
     dispatch(getDeleteForm(id));
     navigate("/");
-  };
-
-  const clickSubs = (event) => {
-    console.log(event.target.value)
-
-    dispatch(getSubscribe(id));
   };
   
   const onClickGoodHandler = () => {
@@ -135,8 +127,6 @@ const Detail = ({ token, userInfo, userImg }) => {
             <Btn
               backgroundColor="red"
               color="#fff"
-              onClick={clickSubs}
-              value="구독중"
             >
               구독중
             </Btn>
@@ -144,8 +134,6 @@ const Detail = ({ token, userInfo, userImg }) => {
             <Btn
               backgroundColor="red"
               color="#fff"
-              onClick={clickSubs}
-              value="구독"
             >
               구독
             </Btn>

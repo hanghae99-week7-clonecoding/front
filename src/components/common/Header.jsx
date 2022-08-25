@@ -89,7 +89,7 @@ const Header = () => {
               icon={faCamera}
             ></FontAwesomeIcon>
           </div>
-          {loginState !== undefined ? (
+          {token ? (
             <div className={styles.profile}>
               <img src={userImg} alt="사진" className={styles.userImg} />
               <div

@@ -20,7 +20,7 @@ export const __postLogin = createAsyncThunk(
       setCookie("userImg", `${data.data.userimage}`);
 
       if (data.data.result) {
-        alert("로그인 성공합니다");
+        alert("로그인하셨습니다!");
         payload.navigation("/");
       }
       return thunkAPI.fulfillWithValue(data.data);
@@ -41,11 +41,10 @@ export const LoginSlice = createSlice({
   extraReducers: {
     [__postLogin.pending]: (state) => {},
     [__postLogin.fulfilled]: (state, action) => {
-      console.log(action.payload);
+      state.isLoading = false;
     },
     [__postLogin.rejected]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
     },
   },
 });

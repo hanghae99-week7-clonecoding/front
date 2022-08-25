@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "../css_modules/AddForm.module.css";
-import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import {
   postWritesThunk,
@@ -46,10 +45,6 @@ const AddForm = () => {
     data.append("category", category);
     data.append("file", file[0]);
 
-    // FormData의 value 확인
-    for (let value of data.values()) {
-      console.log(value);
-    }
     dispatch(postWritesThunk(data));
     navigate("/");
   };
@@ -205,5 +200,3 @@ const AddForm = () => {
 };
 
 export default AddForm;
-
-// 남은 일 1. 등록 후 메인으로 이동하게 2. 수정 후 상세페이지로 이동하게

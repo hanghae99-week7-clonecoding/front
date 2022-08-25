@@ -84,9 +84,6 @@ const CommentList = ({ id, check, token, userInfo }) => {
       )}
     </div>
   );
-  //   {
-  //     data ? <button>으아</button> : <button>수정</button>;
-  //   }
 };
 
 export default CommentList;

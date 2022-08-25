@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../res/instance";
 const initialState = {
@@ -7,7 +6,6 @@ const initialState = {
   error: null,
 };
 
-console.log(instance.defaults.headers);
 export const __getMovie = createAsyncThunk(
   "lists/getMovie",
   async (payload, thunkAPI) => {
@@ -33,7 +31,6 @@ export const __getCategory = createAsyncThunk(
 export const __getTitle = createAsyncThunk(
   "lists/getTitle",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const data = await instance.get(`post/searchkey/${payload}`);
       return thunkAPI.fulfillWithValue(data.data);
@@ -69,7 +66,6 @@ export const mainSlice = createSlice({
     [__getTitle.pending]: (state) => {},
     [__getTitle.fulfilled]: (state, action) => {
       state.lists = action.payload.result;
-      console.log(action.payload);
     },
   },
 });

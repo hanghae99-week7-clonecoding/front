@@ -1,12 +1,17 @@
 import axios from "axios";
-const getToken = localStorage.getItem("jwtToken");
+import { getCookie } from "./cookie";
 
+console.log(getCookie("jwtToken"));
 const instance = axios.create({
-  baseURL: "http://nodeapi.myspaceti.me:8002/api",
-  headers: { token: `Bearer ${getToken}` },
+  baseURL: "http://15.164.221.168:8000/",
+  headers: { token: getCookie("jwtToken") },
+  withCredentials: true,
 });
-// if (getToken) {
-//   instance.defaults.headers.common["token"] = `Bearer ${getToken}`;
+
+// if (getCookie("jwtToken") === undefined) {
+//   instance.defaults.headers.common["token"] = 500;
+// } else {
+//   instance.defaults.headers.common["token"] = getCookie("jwtToken");
 // }
 
 export default instance;

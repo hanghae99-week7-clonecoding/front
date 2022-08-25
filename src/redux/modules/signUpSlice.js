@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../res/instance";
-// import axios from "axios";
 
 const initialState = {
   result: "",
@@ -10,8 +9,9 @@ const initialState = {
 export const addUser = createAsyncThunk(
   "signUpSlice/addUser",
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
-      const responseData = await instance.post("user/signup", payload);
+      const responseData = await instance.post("user/signup", payload.formdata);
       if (responseData.data.result) {
         alert("회원이 되신걸 축하드립니다!");
         payload.navigation("/login");

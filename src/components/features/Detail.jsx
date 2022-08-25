@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getDetailData,
   getDeleteForm,
-  getSubscribe,
   goodDetail,
 } from "../../redux/modules/detailSlice";
 
@@ -47,7 +46,7 @@ const Detail = ({ token, userInfo, userImg }) => {
     navigate("/addform", { state: { add: "edit", data: result, postId: id } });
   };
 
-  const deleteForm = (event) => {
+  const deleteForm = () => {
     dispatch(getDeleteForm(id));
     navigate("/");
   };
@@ -122,22 +121,9 @@ const Detail = ({ token, userInfo, userImg }) => {
             <p>{result.discription}</p>
             <span>자세히</span>
           </div>
-
-          {result.subscribe === "구독자" ? (
-            <Btn
-              backgroundColor="red"
-              color="#fff"
-            >
-              구독중
-            </Btn>
-          ) : (
-            <Btn
-              backgroundColor="red"
-              color="#fff"
-            >
-              구독
-            </Btn>
-          )}
+          <Btn backgroundColor="red" color="#fff" value="구독">
+            구독
+          </Btn>
         </div>
         <div className="commentsArea">
           <Comment

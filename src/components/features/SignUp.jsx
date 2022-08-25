@@ -126,7 +126,7 @@ const SignUp = () => {
     formdata.append("password", passData);
     formdata.append("confirmPassword", confirmPass);
     formdata.append("img", imgFile); //이미지
-    dispatch(addUser(formdata, navigation));
+    dispatch(addUser({ formdata, navigation }));
   };
 
   return (

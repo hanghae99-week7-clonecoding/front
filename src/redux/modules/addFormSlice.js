@@ -16,7 +16,6 @@ export const postWritesThunk = createAsyncThunk(
 export const postEditThunk = createAsyncThunk(
   "editForm/getEditForm",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const response = await instance.put(`post/${payload.id}`, payload.data);
       return response.data;

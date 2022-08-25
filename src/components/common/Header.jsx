@@ -39,7 +39,7 @@ const Header = () => {
     });
   };
   useEffect(() => {
-    token === undefined ? setLoginState(true) : setLoginState(false);
+    token ? setLoginState(true) : setLoginState(false);
   }, [token]);
   return (
     <div>
@@ -73,6 +73,7 @@ const Header = () => {
             className={styles.HeaderInput}
             value={search.keyword}
           ></input>
+
           <button>
             <FontAwesomeIcon
               style={{ height: "15px" }}
@@ -81,14 +82,17 @@ const Header = () => {
           </button>
         </form>
         <div className={styles.HeaderSerch}>
-          <div>
-            <FontAwesomeIcon
-              onClick={() => {
-                navigate("/addform", { state: { add: "add" } });
-              }}
-              icon={faCamera}
-            ></FontAwesomeIcon>
-          </div>
+          {loginState ? (
+            <div>
+              <FontAwesomeIcon
+                onClick={() => {
+                  navigate("/addform", { state: { add: "add" } });
+                }}
+                icon={faCamera}
+              ></FontAwesomeIcon>
+            </div>
+          ) : null}
+
           {token ? (
             <div className={styles.profile}>
               <img src={userImg} alt="사진" className={styles.userImg} />

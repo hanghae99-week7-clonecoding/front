@@ -1,9 +1,5 @@
 ## 1. 시연영상
 
----
-
-**[http://faketube-clone.s3-website.ap-northeast-2.amazonaws.com/](http://faketube-clone.s3-website.ap-northeast-2.amazonaws.com/)**
-
 [https://www.youtube.com/watch?v=gpe1IZ0HHr8](https://www.youtube.com/watch?v=gpe1IZ0HHr8)
 
 ## 2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
